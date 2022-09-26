@@ -1,0 +1,11 @@
+---
+#- name: Start kernel driver
+  #command: "$SDE_INSTALL/bin/bf_kdrv_mod_load $SDE_INSTALL"
+- name: "start UP"
+  command: $SDE/run_switchd.sh --conf-file= $P4SRC/p4-mat-tests.conf --background
+  async: 1000000
+  poll: 0
+  register: out
+
+- name: "load dp instructions"
+  command: python3 $P4SRC/mat-tests-cp.py

@@ -1,0 +1,29 @@
+---
+- hosts: data_plane
+  become: yes
+  tasks:
+    - import_tasks: start_mat_tests.playbook.yml
+      environment:
+        SDE_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
+        SDE: /home/ubuntu/bf-sde-9.9.0
+        BSP_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
+        P4SRC: /home/ubuntu/p4-mat-tests/
+
+- hosts: traffic_gen
+  tasks:
+    - name: restart trex-server
+      service:
+        name: trex-server
+        state: restarted
+      async: 100000
+      poll: 0
+
+    - name: let trex start
+      pause:
+        seconds: 15
+
+    - name: start traffic
+      command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_gtp.py -c -n 1 --outer-tag 400 --packet-size 64 -d 45 -n 1000 -i 5 -s
+      become: yes
+      args:
+        chdir: /opt/trex/v2.97/
