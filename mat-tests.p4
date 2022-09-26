@@ -61,6 +61,11 @@ parser SwitchIngressParser(packet_in pkt, out headers_t hdr, out metadata_t meta
 
     state parse_gtp {
         pkt.extract(hdr.gtp);
+	transition parse_ipv4_inner;
+    }
+
+    state parse_ipv4_inner {
+        pkt.extract(hdr.ipv4_inner);
         transition accept;
     }
 }

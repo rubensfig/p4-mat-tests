@@ -1,10 +1,22 @@
 #!/usr/bin/env python
 
+import glob
+import sys
+import socket
+import binascii
+import os
+
+bfrt_location = '{}/lib/python*/site-packages/tofino'.format( os.environ['SDE_INSTALL'])
+
+sys.path.append(glob.glob(bfrt_location)[0])
+
+import bfrt_grpc.client as gc
+
 bfrt_ip = "127.0.0.1"
 bfrt_port = "50052"
 
-ING_PORT = 288
-EG_PORT = 156
+IG_PORT = 288
+EG_PORT = 292
 
 def mac_str_to_int(mac_address):
     return int(mac_address.replace(':', ''), 16)
@@ -57,7 +69,7 @@ interface = gc.ClientInterface(
     "{}:{}".format(bfrt_ip, bfrt_port), client_id=0, device_id=0
 )
 
-bfrt_info = self.interface.bfrt_info_get("p4_mat_tests")
+bfrt_info = interface.bfrt_info_get("mat-tests")
 interface.bind_pipeline_config(p4_name=bfrt_info.p4_name)
 
 #
@@ -68,7 +80,7 @@ data = {
         'egress_port': EG_PORT
         }
 data_action='a_to_cpu'
-self.bfrt_connection.addEntry('table_1', data_action, key, data)
+bfrt_add_entry(bfrt_info, target, 'table_1', data_action, key, data)
 #
 
 #
@@ -79,7 +91,7 @@ data = {
         'egress_port': EG_PORT
         }
 data_action='a_to_cpu'
-self.bfrt_connection.addEntry('table_2', data_action, key, data)
+bfrt_add_entry(bfrt_info, target,'table_2', data_action, key, data)
 #
 
 #
@@ -90,7 +102,7 @@ data = {
         'egress_port': EG_PORT
         }
 data_action='a_to_cpu'
-self.bfrt_connection.addEntry('table_3', data_action, key, data)
+bfrt_add_entry(bfrt_info, target,'table_3', data_action, key, data)
 #
 
 #
@@ -101,7 +113,7 @@ data = {
         'egress_port': EG_PORT
         }
 data_action='a_to_cpu'
-self.bfrt_connection.addEntry('table_4', data_action, key, data)
+bfrt_add_entry(bfrt_info, target,'table_4', data_action, key, data)
 #
 
 #
@@ -112,7 +124,7 @@ data = {
         'egress_port': EG_PORT
         }
 data_action='a_to_cpu'
-self.bfrt_connection.addEntry('table_5', data_action, key, data)
+bfrt_add_entry(bfrt_info, target,'table_5', data_action, key, data)
 #
 
 #
@@ -123,7 +135,7 @@ data = {
         'egress_port': EG_PORT
         }
 data_action='a_to_cpu'
-self.bfrt_connection.addEntry('table_6', data_action, key, data)
+bfrt_add_entry(bfrt_info, target,'table_6', data_action, key, data)
 #
 
 #
@@ -134,7 +146,7 @@ data = {
         'egress_port': EG_PORT
         }
 data_action='a_to_cpu'
-self.bfrt_connection.addEntry('table_7', data_action, key, data)
+bfrt_add_entry(bfrt_info, target,'table_7', data_action, key, data)
 #
 
 #
@@ -145,7 +157,7 @@ data = {
         'egress_port': EG_PORT
         }
 data_action='a_to_cpu'
-self.bfrt_connection.addEntry('table_8', data_action, key, data)
+bfrt_add_entry(bfrt_info, target,'table_8', data_action, key, data)
 #
 
 #
@@ -156,7 +168,7 @@ data = {
         'egress_port': EG_PORT
         }
 data_action='a_to_cpu'
-self.bfrt_connection.addEntry('table_9', data_action, key, data)
+bfrt_add_entry(bfrt_info, target,'table_9', data_action, key, data)
 #
 
 #
@@ -167,7 +179,7 @@ data = {
         'egress_port': EG_PORT
         }
 data_action='a_to_cpu'
-self.bfrt_connection.addEntry('table_10', data_action, key, data)
+bfrt_add_entry(bfrt_info, target,'table_10', data_action, key, data)
 #
 
 #
@@ -178,5 +190,5 @@ data = {
         'egress_port': EG_PORT
         }
 data_action='a_to_cpu'
-self.bfrt_connection.addEntry('table_11', data_action, key, data)
+bfrt_add_entry(bfrt_info, target,'table_11', data_action, key, data)
 #
