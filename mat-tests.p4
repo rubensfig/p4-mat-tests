@@ -89,6 +89,9 @@ control SwitchIngress(
     }
 
     @name(".table_1")
+#ifdef TCAM
+    @pragma ternary 1
+#endif
     table t_table1 {
         key = {
             ig_intr_md.ingress_port: exact;
@@ -100,6 +103,9 @@ control SwitchIngress(
     }
 
     @name(".table_2")
+#ifdef TCAM
+    @pragma ternary 1
+#endif
     table t_table2 {
         key = {
             hdr.ethernet.dstAddr : exact;
@@ -111,6 +117,9 @@ control SwitchIngress(
     }
 
     @name(".table_3")
+#ifdef TCAM
+    @pragma ternary 1
+#endif
     table t_table3 {
         key = {
             hdr.ethernet.srcAddr : exact;
@@ -122,6 +131,9 @@ control SwitchIngress(
     }
 
     @name(".table_4")
+#ifdef TCAM
+    @pragma ternary 1
+#endif
     table t_table4 {
         key = {
             hdr.ethernet.etherType : exact;
@@ -133,6 +145,9 @@ control SwitchIngress(
     }
 
     @name(".table_5")
+#ifdef TCAM
+    @pragma ternary 1
+#endif
     table t_table5 {
         key = {
             hdr.ipv4.protocol : exact;
@@ -144,6 +159,9 @@ control SwitchIngress(
     }
 
     @name(".table_6")
+#ifdef TCAM
+    @pragma ternary 1
+#endif
     table t_table6 {
         key = {
             hdr.ipv4.srcAddr : exact;
@@ -155,6 +173,9 @@ control SwitchIngress(
     }
 
     @name(".table_7")
+#ifdef TCAM
+    @pragma ternary 1
+#endif
     table t_table7 {
         key = {
             hdr.ipv4.dstAddr : exact;
@@ -166,6 +187,9 @@ control SwitchIngress(
     }
 
     @name(".table_8")
+#ifdef TCAM
+    @pragma ternary 1
+#endif
     table t_table8 {
         key = {
             hdr.udp.srcPort : exact;
@@ -177,6 +201,9 @@ control SwitchIngress(
     }
 
     @name(".table_9")
+#ifdef TCAM
+    @pragma ternary 1
+#endif
     table t_table9 {
         key = {
             hdr.udp.dstPort : exact;
@@ -189,6 +216,9 @@ control SwitchIngress(
 
 
     @name(".table_10")
+#ifdef TCAM
+    @pragma ternary 1
+#endif
     table t_table10 {
         key = {
             hdr.gtp.teid : exact;
@@ -200,6 +230,9 @@ control SwitchIngress(
     }
 
     @name(".table_11")
+#ifdef TCAM
+    @pragma ternary 1
+#endif
     table t_table11 {
         key = {
             hdr.ipv4_inner.srcAddr : exact;
