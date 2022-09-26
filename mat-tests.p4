@@ -14,6 +14,7 @@ struct headers_t {
     ipv4_t     ipv4;
     udp_t      udp;
     gtp_v1_t   gtp;
+    ipv4_t     ipv4_inner;
 }
 
 // ---------------------------------------------------------------------------
