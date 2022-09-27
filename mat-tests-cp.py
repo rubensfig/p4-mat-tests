@@ -52,7 +52,11 @@ def bfrt_add_entry(
         else:
             data.append(gc.DataTuple(k, v))
 
-    data_tuple = table_info.make_data(data, action_name)
+    data_tuple = None
+    if action_name:
+        data_tuple = table_info.make_data(data, action_name)
+    else:
+        data_tuple = table_info.make_data(data)
 
     try:
         if is_default:
