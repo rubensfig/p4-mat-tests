@@ -9,5 +9,5 @@ traffic_gen:
   hosts:
     waldorf.labshared.bisdn.de:
   vars:
-    ansible_user: ubuntu
+    ansible_user: centos
 

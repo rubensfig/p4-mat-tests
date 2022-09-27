@@ -23,7 +23,7 @@
         seconds: 15
 
     - name: start traffic
-      command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_gtp.py -c -n 1 --outer-tag 400 --packet-size 64 -d 45 -n 1000 -i 5 -s
+      command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_gtp.py -c -n 1 --latency True -d 60 -o results/
       become: yes
       args:
         chdir: /opt/trex/v2.97/

@@ -74,6 +74,32 @@ interface.bind_pipeline_config(p4_name=bfrt_info.p4_name)
 
 #
 key = {
+        '$SDEV_PORT': 288,
+      }
+data = {
+        '$SPEED': 'BF_SPEED_100G',
+        '$FEC': 'BF_FEC_TYP_NONE',
+        '$PORT_ENABLE': True
+        }
+data_action=''
+bfrt_add_entry(bfrt_info, target, 'port.port', data_action, key, data)
+#
+
+#
+key = {
+        '$SDEV_PORT': 292,
+      }
+data = {
+        '$SPEED': 'BF_SPEED_100G',
+        '$FEC': 'BF_FEC_TYP_NONE',
+        '$PORT_ENABLE': True
+        }
+data_action=''
+bfrt_add_entry(bfrt_info, target, 'port.port', data_action, key, data)
+#
+
+#
+key = {
         'ig_intr_md.ingress_port': IG_PORT,
       }
 data = {
