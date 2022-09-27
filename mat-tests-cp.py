@@ -82,7 +82,7 @@ key = {
       }
 data = {
         '$SPEED': 'BF_SPEED_100G',
-        '$FEC': 'BF_FEC_TYP_NONE',
+        '$FEC': 'BF_FEC_TYP_REED_SOLOMON',
         '$PORT_ENABLE': True
         }
 data_action=''
@@ -95,7 +95,7 @@ key = {
       }
 data = {
         '$SPEED': 'BF_SPEED_100G',
-        '$FEC': 'BF_FEC_TYP_NONE',
+        '$FEC': 'BF_FEC_TYP_REED_SOLOMON',
         '$PORT_ENABLE': True
         }
 data_action=''
