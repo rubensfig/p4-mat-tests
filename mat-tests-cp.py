@@ -49,6 +49,8 @@ def bfrt_add_entry(
         dt = None
         if isinstance(v, bool):
             data.append(gc.DataTuple(k, bool_val = v))
+        if isinstance(v, str):
+            data.append(gc.DataTuple(k, str_val = v))
         else:
             data.append(gc.DataTuple(k, v))
 
