@@ -279,6 +279,7 @@ control SwitchIngress(
         key = {
             hdr.ipv4_inner.srcAddr : exact;
         }
+        actions = {}
         size = 65536;
     }
 
