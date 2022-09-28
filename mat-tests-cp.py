@@ -173,10 +173,10 @@ bfrt_add_entry(bfrt_info, target,'table_6', data_action, key, data)
 
 #
 key = {
-        'hdr.udp.dstPort': 2152
+        'hdr.ipv4.dstAddr': ip2int("10.71.33.131")
       }
 data = {
-        'dstAddr': ip2int("10.71.33.131")
+        'srcPort':  21512
         }
 data_action='a_table7'
 bfrt_add_entry(bfrt_info, target,'table_7', data_action, key, data)
