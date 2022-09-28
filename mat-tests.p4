@@ -90,7 +90,7 @@ control SwitchIngress(
         inout ingress_intrinsic_metadata_for_deparser_t ig_intr_md_for_dprsr,
         inout ingress_intrinsic_metadata_for_tm_t ig_intr_tm_md) {
 
-    action a_set_port(bit<48> mac_address, PortId_t egress_port) {
+    action a_set_port(bit<48> srcAddr, PortId_t egress_port) {
         ig_intr_tm_md.ucast_egress_port = egress_port;
         hdr.ethernet.srcAddr = mac_address;
     }
@@ -109,7 +109,7 @@ control SwitchIngress(
         size = 65536;
     }
 
-    action a_table2(bit<48> mac_address) {
+    action a_table2(bit<48> dstAddr) {
         hdr.ethernet.dstAddr = mac_address;
     }
 
