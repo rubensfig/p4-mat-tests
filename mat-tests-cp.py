@@ -5,6 +5,7 @@ import sys
 import socket
 import binascii
 import os
+import json
 
 class Session:
     def __init__(
