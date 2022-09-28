@@ -250,7 +250,7 @@ for i, v in sessions.items():
             'hdr.gtp.teid': v.pppoe_sid
           }
     data = {
-             'srcAddr': ip2int(ipaddress.ip_address("192.168.0.1") + v.pppoe_sid)
+             'srcAddr': ip2int(str(ipaddress.ip_address("192.168.0.1") + v.pppoe_sid))
             }
     data_action='a_table10'
     bfrt_add_entry(bfrt_info, target,'table_10', data_action, key, data)
@@ -258,7 +258,7 @@ for i, v in sessions.items():
 
     #
     key = {
-             'hdr.ipv4_inner.srcAddr': ip2int(ipaddress.ip_address("192.168.0.1") + v.pppoe_sid)
+             'hdr.ipv4_inner.srcAddr': ip2int(str(ipaddress.ip_address("192.168.0.1") + v.pppoe_sid))
           }
     data = {
             'port': EG_PORT,
