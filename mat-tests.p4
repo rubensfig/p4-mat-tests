@@ -90,8 +90,9 @@ control SwitchIngress(
         inout ingress_intrinsic_metadata_for_deparser_t ig_intr_md_for_dprsr,
         inout ingress_intrinsic_metadata_for_tm_t ig_intr_tm_md) {
 
-    action a_to_cpu(PortId_t egress_port) {
+    action a_set_port(bit<48> mac_address, PortId_t egress_port) {
         ig_intr_tm_md.ucast_egress_port = egress_port;
+        hdr.ethernet.srcAddr = mac_address;
     }
 
     @name(".table_1")
@@ -103,9 +104,13 @@ control SwitchIngress(
             ig_intr_md.ingress_port: exact;
         }
         actions = {
-            a_to_cpu;
+            a_set_port;
         }
-        size = 1024;
+        size = 65536;
+    }
+
+    action a_table2(bit<48> mac_address) {
+        hdr.ethernet.dstAddr = mac_address;
     }
 
     @name(".table_2")
@@ -114,12 +119,16 @@ control SwitchIngress(
 #endif
     table t_table2 {
         key = {
-            hdr.ethernet.dstAddr : exact;
+            hdr.ethernet.srcAddr : exact;
         }
         actions = {
-            a_to_cpu;
+            a_table2;
         }
-        size = 1024;
+        size = 65536;
+    }
+
+    action a_table3(bit<16> etherType) {
+        hdr.ethernet.etherType = etherType;
     }
 
     @name(".table_3")
@@ -128,12 +137,16 @@ control SwitchIngress(
 #endif
     table t_table3 {
         key = {
-            hdr.ethernet.srcAddr : exact;
+            hdr.ethernet.dstAddr : exact;
         }
         actions = {
-            a_to_cpu;
+            a_table_3;
         }
-        size = 1024;
+        size = 65536;
+    }
+
+    action a_table4(bit<8> protocol) {
+        hdr.ethernet.etherType = etherType;
     }
 
     @name(".table_4")
@@ -145,9 +158,13 @@ control SwitchIngress(
             hdr.ethernet.etherType : exact;
         }
         actions = {
-            a_to_cpu;
+            a_table4;
         }
-        size = 1024;
+        size = 65536;
+    }
+
+    action a_table5(bit<32> srcAddr) {
+        hdr.ipv4.srcAddr = srcAddr;
     }
 
     @name(".table_5")
@@ -161,7 +178,11 @@ control SwitchIngress(
         actions = {
             a_to_cpu;
         }
-        size = 1024;
+        size = 65536;
+    }
+
+    action a_table6(bit<32> dstAddr) {
+        hdr.ipv4.dstAddr = dstAddr;
     }
 
     @name(".table_6")
@@ -175,7 +196,11 @@ control SwitchIngress(
         actions = {
             a_to_cpu;
         }
-        size = 1024;
+        size = 65536;
+    }
+
+    action a_table7(bit<16> srcPort) {
+        hdr.udp.srcPort = srcPort;
     }
 
     @name(".table_7")
@@ -189,7 +214,11 @@ control SwitchIngress(
         actions = {
             a_to_cpu;
         }
-        size = 1024;
+        size = 65536;
+    }
+
+    action a_table8(bit<16> dstport) {
+        hdr.udp.dstport = dstport;
     }
 
     @name(".table_8")
@@ -203,7 +232,11 @@ control SwitchIngress(
         actions = {
             a_to_cpu;
         }
-        size = 1024;
+        size = 65536;
+    }
+
+    action a_table9(bit<32> teid) {
+        hdr.gtp.teid = teid;
     }
 
     @name(".table_9")
@@ -217,9 +250,12 @@ control SwitchIngress(
         actions = {
             a_to_cpu;
         }
-        size = 1024;
+        size = 65536;
     }
 
+    action a_table10(bit<16> srcAddr) {
+        hdr.ipv4_inner.srcAddr = srcAddr;
+    }
 
     @name(".table_10")
 #ifdef TCAM
@@ -232,7 +268,7 @@ control SwitchIngress(
         actions = {
             a_to_cpu;
         }
-        size = 1024;
+        size = 65536;
     }
 
     @name(".table_11")
@@ -243,10 +279,7 @@ control SwitchIngress(
         key = {
             hdr.ipv4_inner.srcAddr : exact;
         }
-        actions = {
-            a_to_cpu;
-        }
-        size = 1024;
+        size = 65536;
     }
 
 
