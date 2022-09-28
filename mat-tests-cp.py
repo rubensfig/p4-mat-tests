@@ -192,7 +192,7 @@ for  i, v in sessions.items():
             'hdr.ipv4.protocol': 0x11
           }
     data = {
-             'srcAddr': ip2int(i.ip_address)
+             'srcAddr': ip2int(v.ip_address)
             }
     data_action='a_table5'
     bfrt_add_entry(bfrt_info, target,'table_5', data_action, key, data)
