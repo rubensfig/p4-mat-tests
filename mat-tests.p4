@@ -146,7 +146,7 @@ control SwitchIngress(
     }
 
     action a_table4(bit<8> protocol) {
-        hdr.ethernet.etherType = etherType;
+        hdr.ipv4.protocol = protocol;
     }
 
     @name(".table_4")
