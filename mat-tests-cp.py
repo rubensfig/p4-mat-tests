@@ -220,8 +220,7 @@ key = {
         'hdr.ipv4_inner.srcAddr': ip2int("192.168.0.1")
       }
 data = {
-        'egress_port': EG_PORT
         }
-data_action='a_to_cpu'
+data_action=''
 bfrt_add_entry(bfrt_info, target,'table_11', data_action, key, data)
 #
