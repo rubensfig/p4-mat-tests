@@ -6,6 +6,7 @@ import socket
 import binascii
 import os
 import json
+import ipaddress
 
 class Session:
     def __init__(
@@ -108,6 +109,8 @@ interface.bind_pipeline_config(p4_name=bfrt_info.p4_name)
 
 sessions = Session.read_sessions_from_file("./sessions.json")
 
+LIMIT = 4096
+
 #
 key = {
         '$DEV_PORT': 288,
@@ -134,13 +137,15 @@ data_action=''
 bfrt_add_entry(bfrt_info, target, '$PORT', data_action, key, data)
 #
 
-for i in sessions:
+for i, v in sessions.items():
+    if int(i) > LIMIT:
+        break
     #
     key = {
             'ig_intr_md.ingress_port': IG_PORT,
           }
     data = {
-            'srcAddr': mac_str_to_int(i.client_mac)
+            'srcAddr': mac_str_to_int(v.client_mac)
             }
     data_action='a_set_port'
     bfrt_add_entry(bfrt_info, target, 'table_1', data_action, key, data)
@@ -148,7 +153,7 @@ for i in sessions:
 
     #
     key = {
-            'hdr.ethernet.srcAddr': mac_str_to_int(i.client_mac)
+            'hdr.ethernet.srcAddr': mac_str_to_int(v.client_mac)
           }
     data = {
             'dstAddr': mac_str_to_int('ff:ff:ff:ff:ff:ff')
@@ -179,27 +184,30 @@ data_action='a_table4'
 bfrt_add_entry(bfrt_info, target,'table_4', data_action, key, data)
 #
 
-#
-key = {
-        'hdr.ipv4.protocol': 0x11
-      }
-data = {
-         'srcAddr': ip2int("10.64.13.28")
-        }
-data_action='a_table5'
-bfrt_add_entry(bfrt_info, target,'table_5', data_action, key, data)
-#
+for  i, v in sessions.items():
+    if int(i) > LIMIT:
+        break
+    #
+    key = {
+            'hdr.ipv4.protocol': 0x11
+          }
+    data = {
+             'srcAddr': ip2int(i.ip_address)
+            }
+    data_action='a_table5'
+    bfrt_add_entry(bfrt_info, target,'table_5', data_action, key, data)
+    #
 
-#
-key = {
-        'hdr.ipv4.srcAddr': ip2int("10.64.13.28")
-      }
-data = {
-         'dstAddr': ip2int("10.71.33.131")
-        }
-data_action='a_table6'
-bfrt_add_entry(bfrt_info, target,'table_6', data_action, key, data)
-#
+    #
+    key = {
+            'hdr.ipv4.srcAddr':ip2int(i.ip_address)
+          }
+    data = {
+             'dstAddr': ip2int("10.71.33.131")
+            }
+    data_action='a_table6'
+    bfrt_add_entry(bfrt_info, target,'table_6', data_action, key, data)
+    #
 
 #
 key = {
@@ -223,35 +231,38 @@ data_action='a_table8'
 bfrt_add_entry(bfrt_info, target,'table_8', data_action, key, data)
 #
 
-#
-key = {
-        'hdr.udp.dstPort': 2152
-      }
-data = {
-         'teid': 1000
-        }
-data_action='a_table9'
-bfrt_add_entry(bfrt_info, target,'table_9', data_action, key, data)
-#
+for i, v in sessions.items():
+    if int(i) > 4096:
+        break
+    #
+    key = {
+            'hdr.udp.dstPort': 2152
+          }
+    data = {
+             'teid': v.pppoe_sid
+            }
+    data_action='a_table9'
+    bfrt_add_entry(bfrt_info, target,'table_9', data_action, key, data)
+    #
 
-#
-key = {
-        'hdr.gtp.teid': 1000
-      }
-data = {
-         'srcAddr': ip2int("192.168.0.1")
-        }
-data_action='a_table10'
-bfrt_add_entry(bfrt_info, target,'table_10', data_action, key, data)
-#
+    #
+    key = {
+            'hdr.gtp.teid': v.pppoe_sid
+          }
+    data = {
+             'srcAddr': ip2int(ipaddress.ip_address("192.168.0.1") + v.pppoe_sid)
+            }
+    data_action='a_table10'
+    bfrt_add_entry(bfrt_info, target,'table_10', data_action, key, data)
+    #
 
-##
-key = {
-         'hdr.ipv4_inner.srcAddr': ip2int("192.168.0.1")
-      }
-data = {
-        'port': EG_PORT,
-        }
-data_action='set_egress_port'
-bfrt_add_entry(bfrt_info, target,'table_11', data_action, key, data)
-#
+    #
+    key = {
+             'hdr.ipv4_inner.srcAddr': ip2int(ipaddress.ip_address("192.168.0.1") + v.pppoe_sid)
+          }
+    data = {
+            'port': EG_PORT,
+            }
+    data_action='set_egress_port'
+    bfrt_add_entry(bfrt_info, target, 'table_11', data_action, key, data)
+    #
