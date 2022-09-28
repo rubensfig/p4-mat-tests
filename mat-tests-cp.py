@@ -110,7 +110,7 @@ key = {
       }
 data = {
         'egress_port': EG_PORT,
-        'srcAddr': '02:00:00:00:00:01'
+        'srcAddr': mac_str_to_int('02:00:00:00:00:01')
         }
 data_action='a_set_port'
 bfrt_add_entry(bfrt_info, target, 'table_1', data_action, key, data)
