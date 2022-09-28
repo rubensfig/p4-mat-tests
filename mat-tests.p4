@@ -217,8 +217,8 @@ control SwitchIngress(
         size = 65536;
     }
 
-    action a_table8(bit<16> dstport) {
-        hdr.udp.dstport = dstport;
+    action a_table8(bit<16> dstPort) {
+        hdr.udp.dstPort = dstPort;
     }
 
     @name(".table_8")
@@ -253,7 +253,7 @@ control SwitchIngress(
         size = 65536;
     }
 
-    action a_table10(bit<16> srcAddr) {
+    action a_table10(bit<32> srcAddr) {
         hdr.ipv4_inner.srcAddr = srcAddr;
     }
 
