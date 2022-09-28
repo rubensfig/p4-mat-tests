@@ -109,7 +109,7 @@ key = {
         'ig_intr_md.ingress_port': IG_PORT,
       }
 data = {
-        'egress_port': EG_PORT
+        'egress_port': EG_PORT,
         'srcAddr': '02:00:00:00:00:01'
         }
 data_action='a_set_port'
