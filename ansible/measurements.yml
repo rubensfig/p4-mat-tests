@@ -10,6 +10,7 @@
         P4SRC: /home/ubuntu/p4-mat-tests/
 
 - hosts: traffic_gen
+  become: yes
   tasks:
     - name: restart trex-server
       service:
@@ -20,10 +21,20 @@
 
     - name: let trex start
       pause:
-        seconds: 15
+        seconds: 20
 
     - name: start traffic
-      command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_gtp.py -c -n 1 --latency True -d 60 -o results/
+      command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_gtp.py -l ./sessions.json -n {{ n_clients }} --latency True -d 60 -o results/
       become: yes
       args:
         chdir: /opt/trex/v2.97/
+
+    - name: copy logs
+      fetch:
+        src: /opt/trex/v2.97/results/results.json
+        dest: ./sram-results-{{ run_id }}-{{ n_clients }}
+
+    - name: delete results
+      file:
+        state: absent
+        path: /opt/trex/v2.97/results/

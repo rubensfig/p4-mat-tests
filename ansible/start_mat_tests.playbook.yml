@@ -23,3 +23,14 @@
   command: python3 mat-tests-cp.py
   args:
     chdir: $P4SRC
+
+- name: "copy experiment logs"
+  fetch:
+    src: $P4SRC/mat-tests.tofino/pipe/logs/{{ item }}
+    dest: ./sram-results-{{ run_id }}-{{ n_clients }}
+  with_items:
+    - mau.json
+    - mau.power.log
+    - power.json
+    - resources.json
+    - table_summary.log
