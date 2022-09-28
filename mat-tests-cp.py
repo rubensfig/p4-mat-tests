@@ -200,7 +200,7 @@ for  i, v in sessions.items():
 
     #
     key = {
-            'hdr.ipv4.srcAddr':ip2int(i.ip_address)
+            'hdr.ipv4.srcAddr':ip2int(v.ip_address)
           }
     data = {
              'dstAddr': ip2int("10.71.33.131")

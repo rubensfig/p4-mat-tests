@@ -27,7 +27,7 @@
 - name: "copy experiment logs"
   fetch:
     src: $P4SRC/mat-tests.tofino/pipe/logs/{{ item }}
-    dest: ./sram-results-{{ run_id }}-{{ n_clients }}
+    dest: ./tcam-results-{{ run_id }}-{{ n_clients }}
   with_items:
     - mau.json
     - mau.power.log
