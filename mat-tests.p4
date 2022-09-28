@@ -285,7 +285,7 @@ control SwitchIngress(
     }
 
     action set_egress_port(PortId_t port) {
-        ig_intr_tm_md.ucast_egress_port = egress_port;
+        ig_intr_tm_md.ucast_egress_port = port;
     }
     @name(".table_11")
 #ifdef TCAM
