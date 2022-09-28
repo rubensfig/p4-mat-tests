@@ -90,9 +90,13 @@ control SwitchIngress(
         inout ingress_intrinsic_metadata_for_deparser_t ig_intr_md_for_dprsr,
         inout ingress_intrinsic_metadata_for_tm_t ig_intr_tm_md) {
 
-    action a_set_port(bit<48> srcAddr, PortId_t egress_port) {
+    action a_to_port(PortId_t egress_port) {
         ig_intr_tm_md.ucast_egress_port = egress_port;
+    }
+
+    action a_set_port(bit<48> srcAddr, PortId_t egress_port) {
         hdr.ethernet.srcAddr = srcAddr;
+	a_to_port(egress_port);
     }
 
     @name(".table_1")
@@ -106,11 +110,12 @@ control SwitchIngress(
         actions = {
             a_set_port;
         }
-        size = 65536;
+        size = 1;
     }
 
-    action a_table2(bit<48> dstAddr) {
-        hdr.ethernet.dstAddr = dstAddr;
+    action a_table2(bit<48> dstAddr, PortId_t egress_port) {
+	hdr.ethernet.dstAddr = dstAddr;
+	a_to_port(egress_port);
     }
 
     @name(".table_2")
@@ -124,11 +129,12 @@ control SwitchIngress(
         actions = {
             a_table2;
         }
-        size = 65536;
+        size = 4096;
     }
 
-    action a_table3(bit<16> etherType) {
+    action a_table3(bit<16> etherType, PortId_t egress_port) {
         hdr.ethernet.etherType = etherType;
+	a_to_port(egress_port);
     }
 
     @name(".table_3")
@@ -142,11 +148,12 @@ control SwitchIngress(
         actions = {
             a_table3;
         }
-        size = 65536;
+        size = 4096;
     }
 
-    action a_table4(bit<8> protocol) {
+    action a_table4(bit<8> protocol, PortId_t egress_port) {
         hdr.ipv4.protocol = protocol;
+	a_to_port(egress_port);
     }
 
     @name(".table_4")
@@ -160,7 +167,7 @@ control SwitchIngress(
         actions = {
             a_table4;
         }
-        size = 65536;
+        size = 4096;
     }
 
     action a_table5(bit<32> srcAddr) {
@@ -178,7 +185,7 @@ control SwitchIngress(
         actions = {
             a_table5;
         }
-        size = 65536;
+        size = 4096;
     }
 
     action a_table6(bit<32> dstAddr) {
@@ -196,7 +203,7 @@ control SwitchIngress(
         actions = {
             a_table6;
         }
-        size = 65536;
+        size = 4096;
     }
 
     action a_table7(bit<16> srcPort) {
@@ -214,7 +221,7 @@ control SwitchIngress(
         actions = {
             a_table7;
         }
-        size = 65536;
+        size = 4096;
     }
 
     action a_table8(bit<16> dstPort) {
@@ -232,7 +239,7 @@ control SwitchIngress(
         actions = {
             a_table8;
         }
-        size = 65536;
+        size = 4096;
     }
 
     action a_table9(bit<32> teid) {
@@ -250,7 +257,7 @@ control SwitchIngress(
         actions = {
             a_table9;
         }
-        size = 65536;
+        size = 4096;
     }
 
     action a_table10(bit<32> srcAddr) {
@@ -268,7 +275,7 @@ control SwitchIngress(
         actions = {
             a_table10;
         }
-        size = 65536;
+        size = 4096;
     }
 
     @name(".table_11")
@@ -280,7 +287,7 @@ control SwitchIngress(
             hdr.ipv4_inner.srcAddr : exact;
         }
         actions = {}
-        size = 65536;
+        size = 4096;
     }
 
 
