@@ -6,6 +6,33 @@ import socket
 import binascii
 import os
 
+class Session:
+    def __init__(
+        self, ip_address, client_mac, server_mac, outer_vlan, inner_vlan, pppoe_sid
+    ):
+        self.ip_address = ip_address
+        self.client_mac = client_mac
+        self.server_mac = server_mac
+        self.outer_vlan = outer_vlan
+        self.inner_vlan = inner_vlan
+        self.pppoe_sid = pppoe_sid
+
+    def __str__(self):
+        return str(self.__dict__)
+
+    @staticmethod
+    def from_dict(dict_obj):
+        return PPPoESession(**dict_obj)
+
+    @staticmethod
+    def read_sessions_from_file(file_name):
+        with open(file_name, "r") as sessions_file:
+            json_obj = json.loads(sessions_file.read())
+            return {
+                key: PPPoESession.from_dict(value) for key, value in json_obj.items()
+            }
+
+
 bfrt_location = '{}/lib/python*/site-packages/tofino'.format( os.environ['SDE_INSTALL'])
 
 sys.path.append(glob.glob(bfrt_location)[0])
@@ -78,6 +105,8 @@ interface = gc.ClientInterface(
 bfrt_info = interface.bfrt_info_get("mat-tests")
 interface.bind_pipeline_config(p4_name=bfrt_info.p4_name)
 
+sessions = Session.read_sessions_from_file("./sessions.json")
+
 #
 key = {
         '$DEV_PORT': 288,
@@ -104,27 +133,28 @@ data_action=''
 bfrt_add_entry(bfrt_info, target, '$PORT', data_action, key, data)
 #
 
-#
-key = {
-        'ig_intr_md.ingress_port': IG_PORT,
-      }
-data = {
-        'srcAddr': mac_str_to_int('02:00:00:00:00:01')
-        }
-data_action='a_set_port'
-bfrt_add_entry(bfrt_info, target, 'table_1', data_action, key, data)
-#
+for i in sessions:
+    #
+    key = {
+            'ig_intr_md.ingress_port': IG_PORT,
+          }
+    data = {
+            'srcAddr': mac_str_to_int(i.client_mac)
+            }
+    data_action='a_set_port'
+    bfrt_add_entry(bfrt_info, target, 'table_1', data_action, key, data)
+    #
 
-#
-key = {
-        'hdr.ethernet.srcAddr': mac_str_to_int('02:00:00:00:00:01')
-      }
-data = {
-        'dstAddr': mac_str_to_int('ff:ff:ff:ff:ff:ff')
-        }
-data_action='a_table2'
-bfrt_add_entry(bfrt_info, target,'table_2', data_action, key, data)
-#
+    #
+    key = {
+            'hdr.ethernet.srcAddr': mac_str_to_int(i.client_mac)
+          }
+    data = {
+            'dstAddr': mac_str_to_int('ff:ff:ff:ff:ff:ff')
+            }
+    data_action='a_table2'
+    bfrt_add_entry(bfrt_info, target,'table_2', data_action, key, data)
+    #
 
 #
 key = {
