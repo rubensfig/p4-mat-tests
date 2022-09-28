@@ -109,7 +109,6 @@ key = {
         'ig_intr_md.ingress_port': IG_PORT,
       }
 data = {
-        'egress_port': EG_PORT,
         'srcAddr': mac_str_to_int('02:00:00:00:00:01')
         }
 data_action='a_set_port'
@@ -143,7 +142,7 @@ key = {
         'hdr.ethernet.etherType': 0x0800
       }
 data = {
-        'protocol': 0x11
+         'protocol': 0x11
         }
 data_action='a_table4'
 bfrt_add_entry(bfrt_info, target,'table_4', data_action, key, data)
@@ -154,7 +153,7 @@ key = {
         'hdr.ipv4.protocol': 0x11
       }
 data = {
-        'srcAddr': ip2int("10.64.13.28")
+         'srcAddr': ip2int("10.64.13.28")
         }
 data_action='a_table5'
 bfrt_add_entry(bfrt_info, target,'table_5', data_action, key, data)
@@ -165,7 +164,7 @@ key = {
         'hdr.ipv4.srcAddr': ip2int("10.64.13.28")
       }
 data = {
-        'dstAddr': ip2int("10.71.33.131")
+         'dstAddr': ip2int("10.71.33.131")
         }
 data_action='a_table6'
 bfrt_add_entry(bfrt_info, target,'table_6', data_action, key, data)
@@ -176,7 +175,7 @@ key = {
         'hdr.ipv4.dstAddr': ip2int("10.71.33.131")
       }
 data = {
-        'srcPort':  21512
+         'srcPort':  21512
         }
 data_action='a_table7'
 bfrt_add_entry(bfrt_info, target,'table_7', data_action, key, data)
@@ -187,7 +186,7 @@ key = {
         'hdr.udp.srcPort': 2152
       }
 data = {
-        'dstPort': 2152
+         'dstPort': 2152
         }
 data_action='a_table8'
 bfrt_add_entry(bfrt_info, target,'table_8', data_action, key, data)
@@ -198,7 +197,7 @@ key = {
         'hdr.udp.dstPort': 2152
       }
 data = {
-        'teid': 1000
+         'teid': 1000
         }
 data_action='a_table9'
 bfrt_add_entry(bfrt_info, target,'table_9', data_action, key, data)
@@ -209,18 +208,19 @@ key = {
         'hdr.gtp.teid': 1000
       }
 data = {
-        'srcAddr': ip2int("192.168.0.1")
+         'srcAddr': ip2int("192.168.0.1")
         }
 data_action='a_table10'
 bfrt_add_entry(bfrt_info, target,'table_10', data_action, key, data)
 #
 
-#
+##
 key = {
-        'hdr.ipv4_inner.srcAddr': ip2int("192.168.0.1")
+         'hdr.ipv4_inner.srcAddr': ip2int("192.168.0.1")
       }
 data = {
+        'port': EG_PORT,
         }
-data_action=''
+data_action='set_egress_port'
 bfrt_add_entry(bfrt_info, target,'table_11', data_action, key, data)
 #

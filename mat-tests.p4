@@ -90,13 +90,13 @@ control SwitchIngress(
         inout ingress_intrinsic_metadata_for_deparser_t ig_intr_md_for_dprsr,
         inout ingress_intrinsic_metadata_for_tm_t ig_intr_tm_md) {
 
-    action a_to_port(PortId_t egress_port) {
-        ig_intr_tm_md.ucast_egress_port = egress_port;
+    action a_us_ds() {
+        meta.usds = 1;
     }
 
-    action a_set_port(bit<48> srcAddr, PortId_t egress_port) {
+    action a_set_port(bit<48> srcAddr) {
         hdr.ethernet.srcAddr = srcAddr;
-	a_to_port(egress_port);
+        a_us_ds();
     }
 
     @name(".table_1")
@@ -113,9 +113,9 @@ control SwitchIngress(
         size = 1;
     }
 
-    action a_table2(bit<48> dstAddr, PortId_t egress_port) {
-	hdr.ethernet.dstAddr = dstAddr;
-	a_to_port(egress_port);
+    action a_table2(bit<48> dstAddr) {
+	    hdr.ethernet.dstAddr = dstAddr;
+        a_us_ds();
     }
 
     @name(".table_2")
@@ -132,9 +132,9 @@ control SwitchIngress(
         size = 4096;
     }
 
-    action a_table3(bit<16> etherType, PortId_t egress_port) {
+    action a_table3(bit<16> etherType) {
         hdr.ethernet.etherType = etherType;
-	a_to_port(egress_port);
+        a_us_ds();
     }
 
     @name(".table_3")
@@ -151,9 +151,9 @@ control SwitchIngress(
         size = 4096;
     }
 
-    action a_table4(bit<8> protocol, PortId_t egress_port) {
+    action a_table4(bit<8> protocol) {
         hdr.ipv4.protocol = protocol;
-	a_to_port(egress_port);
+        a_us_ds();
     }
 
     @name(".table_4")
@@ -170,9 +170,9 @@ control SwitchIngress(
         size = 4096;
     }
 
-    action a_table5(bit<32> srcAddr, PortId_t egress_port) {
+    action a_table5(bit<32> srcAddr) {
         hdr.ipv4.srcAddr = srcAddr;
-	a_to_port(egress_port);
+        a_us_ds();
     }
 
     @name(".table_5")
@@ -189,9 +189,9 @@ control SwitchIngress(
         size = 4096;
     }
 
-    action a_table6(bit<32> dstAddr, PortId_t egress_port) {
+    action a_table6(bit<32> dstAddr) {
         hdr.ipv4.dstAddr = dstAddr;
-	a_to_port(egress_port);
+        a_us_ds();
     }
 
     @name(".table_6")
@@ -208,9 +208,9 @@ control SwitchIngress(
         size = 4096;
     }
 
-    action a_table7(bit<16> srcPort, PortId_t egress_port) {
+    action a_table7(bit<16> srcPort) {
         hdr.udp.srcPort = srcPort;
-	a_to_port(egress_port);
+        a_us_ds();
     }
 
     @name(".table_7")
@@ -227,9 +227,9 @@ control SwitchIngress(
         size = 4096;
     }
 
-    action a_table8(bit<16> dstPort, PortId_t egress_port) {
+    action a_table8(bit<16> dstPort) {
         hdr.udp.dstPort = dstPort;
-	a_to_port(egress_port);
+        a_us_ds();
     }
 
     @name(".table_8")
@@ -246,9 +246,9 @@ control SwitchIngress(
         size = 4096;
     }
 
-    action a_table9(bit<32> teid, PortId_t egress_port) {
+    action a_table9(bit<32> teid) {
         hdr.gtp.teid = teid;
-	a_to_port(egress_port);
+        a_us_ds();
     }
 
     @name(".table_9")
@@ -265,9 +265,9 @@ control SwitchIngress(
         size = 4096;
     }
 
-    action a_table10(bit<32> srcAddr, PortId_t egress_port) {
+    action a_table10(bit<32> srcAddr) {
         hdr.ipv4_inner.srcAddr = srcAddr;
-	a_to_port(egress_port);
+        a_us_ds();
     }
 
     @name(".table_10")
@@ -284,6 +284,9 @@ control SwitchIngress(
         size = 4096;
     }
 
+    action set_egress_port(PortId_t port) {
+        ig_intr_tm_md.ucast_egress_port = egress_port;
+    }
     @name(".table_11")
 #ifdef TCAM
     @pragma ternary 1
@@ -292,7 +295,9 @@ control SwitchIngress(
         key = {
             hdr.ipv4_inner.srcAddr : exact;
         }
-        actions = {}
+        actions = {
+            set_egress_port;
+        }
         size = 4096;
     }
 
