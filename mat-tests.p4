@@ -92,7 +92,7 @@ control SwitchIngress(
 
     action a_set_port(bit<48> srcAddr, PortId_t egress_port) {
         ig_intr_tm_md.ucast_egress_port = egress_port;
-        hdr.ethernet.srcAddr = mac_address;
+        hdr.ethernet.srcAddr = srcAddr;
     }
 
     @name(".table_1")
@@ -110,7 +110,7 @@ control SwitchIngress(
     }
 
     action a_table2(bit<48> dstAddr) {
-        hdr.ethernet.dstAddr = mac_address;
+        hdr.ethernet.dstAddr = dstAddr;
     }
 
     @name(".table_2")
