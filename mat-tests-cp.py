@@ -23,14 +23,14 @@ class Session:
 
     @staticmethod
     def from_dict(dict_obj):
-        return PPPoESession(**dict_obj)
+        return Session(**dict_obj)
 
     @staticmethod
     def read_sessions_from_file(file_name):
         with open(file_name, "r") as sessions_file:
             json_obj = json.loads(sessions_file.read())
             return {
-                key: PPPoESession.from_dict(value) for key, value in json_obj.items()
+                key: Session.from_dict(value) for key, value in json_obj.items()
             }
 
 
