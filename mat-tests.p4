@@ -170,8 +170,9 @@ control SwitchIngress(
         size = 4096;
     }
 
-    action a_table5(bit<32> srcAddr) {
+    action a_table5(bit<32> srcAddr, PortId_t egress_port) {
         hdr.ipv4.srcAddr = srcAddr;
+	a_to_port(egress_port);
     }
 
     @name(".table_5")
@@ -188,8 +189,9 @@ control SwitchIngress(
         size = 4096;
     }
 
-    action a_table6(bit<32> dstAddr) {
+    action a_table6(bit<32> dstAddr, PortId_t egress_port) {
         hdr.ipv4.dstAddr = dstAddr;
+	a_to_port(egress_port);
     }
 
     @name(".table_6")
@@ -206,8 +208,9 @@ control SwitchIngress(
         size = 4096;
     }
 
-    action a_table7(bit<16> srcPort) {
+    action a_table7(bit<16> srcPort, PortId_t egress_port) {
         hdr.udp.srcPort = srcPort;
+	a_to_port(egress_port);
     }
 
     @name(".table_7")
@@ -224,8 +227,9 @@ control SwitchIngress(
         size = 4096;
     }
 
-    action a_table8(bit<16> dstPort) {
+    action a_table8(bit<16> dstPort, PortId_t egress_port) {
         hdr.udp.dstPort = dstPort;
+	a_to_port(egress_port);
     }
 
     @name(".table_8")
@@ -242,8 +246,9 @@ control SwitchIngress(
         size = 4096;
     }
 
-    action a_table9(bit<32> teid) {
+    action a_table9(bit<32> teid, PortId_t egress_port) {
         hdr.gtp.teid = teid;
+	a_to_port(egress_port);
     }
 
     @name(".table_9")
@@ -260,8 +265,9 @@ control SwitchIngress(
         size = 4096;
     }
 
-    action a_table10(bit<32> srcAddr) {
+    action a_table10(bit<32> srcAddr, PortId_t egress_port) {
         hdr.ipv4_inner.srcAddr = srcAddr;
+	a_to_port(egress_port);
     }
 
     @name(".table_10")
