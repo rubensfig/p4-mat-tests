@@ -176,7 +176,7 @@ control SwitchIngress(
             hdr.ipv4.protocol : exact;
         }
         actions = {
-            table_5;
+            a_table_5;
         }
         size = 65536;
     }
@@ -194,7 +194,7 @@ control SwitchIngress(
             hdr.ipv4.srcAddr : exact;
         }
         actions = {
-            table_6;
+            a_table_6;
         }
         size = 65536;
     }
@@ -212,7 +212,7 @@ control SwitchIngress(
             hdr.ipv4.dstAddr : exact;
         }
         actions = {
-            table_7;
+            a_table_7;
         }
         size = 65536;
     }
@@ -230,7 +230,7 @@ control SwitchIngress(
             hdr.udp.srcPort : exact;
         }
         actions = {
-            table_8;
+            a_table_8;
         }
         size = 65536;
     }
@@ -248,7 +248,7 @@ control SwitchIngress(
             hdr.udp.dstPort : exact;
         }
         actions = {
-            table_9;
+            a_table_9;
         }
         size = 65536;
     }
