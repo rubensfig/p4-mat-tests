@@ -5,19 +5,6 @@
 #include "header.p4"
 #include "util.p4"
 
-#ifdef WDTH_32
-struct wd_32 {
-    bit<32> trash1;
-}
-#endif
-
-#ifdef WDTH_64
-struct wd_64 {
-    bit<32> trash1;
-    bit<32> trash2;
-}
-#endif
-
 struct metadata_t {
     bit<1> usds;
 #ifdef WDTH_32
@@ -26,6 +13,140 @@ struct metadata_t {
 #ifdef WDTH_64
     bit<32> trash1;
     bit<32> trash2;
+#endif
+#ifdef WDTH_128
+    bit<32> trash1;
+    bit<32> trash2;
+    bit<32> trash3;
+    bit<32> trash4;
+#endif
+#ifdef WDTH_512
+    bit<64> trash1;
+    bit<64> trash2;
+    bit<64> trash3;
+    bit<64> trash4;
+    bit<64> trash5;
+    bit<64> trash6;
+    bit<64> trash7;
+    bit<64> trash8;
+#endif
+#ifdef WDTH_1024
+    bit<64> trash1;
+    bit<64> trash2;
+    bit<64> trash3;
+    bit<64> trash4;
+    bit<64> trash5;
+    bit<64> trash6;
+    bit<64> trash7;
+    bit<64> trash8;
+    bit<64> trash9;
+    bit<64> trash10;
+    bit<64> trash11;
+    bit<64> trash12;
+    bit<64> trash13;
+    bit<64> trash14;
+    bit<64> trash15;
+    bit<64> trash16;
+#endif
+#ifdef WDTH_2048
+    bit<64> trash1;
+    bit<64> trash2;
+    bit<64> trash3;
+    bit<64> trash4;
+    bit<64> trash5;
+    bit<64> trash6;
+    bit<64> trash7;
+    bit<64> trash8;
+    bit<64> trash9;
+    bit<64> trash10;
+    bit<64> trash11;
+    bit<64> trash12;
+    bit<64> trash13;
+    bit<64> trash14;
+    bit<64> trash15;
+    bit<64> trash16;
+    bit<64> trash17;
+    bit<64> trash18;
+    bit<64> trash19;
+    bit<64> trash20;
+    bit<64> trash21;
+    bit<64> trash22;
+    bit<64> trash23;
+    bit<64> trash24;
+    bit<64> trash25;
+    bit<64> trash26;
+    bit<64> trash27;
+    bit<64> trash28;
+    bit<64> trash29;
+    bit<64> trash30;
+    bit<64> trash31;
+    bit<64> trash32;
+#endif
+#ifdef WDTH_4096
+    bit<64> trash1;
+    bit<64> trash2;
+    bit<64> trash3;
+    bit<64> trash4;
+    bit<64> trash5;
+    bit<64> trash6;
+    bit<64> trash7;
+    bit<64> trash8;
+    bit<64> trash9;
+    bit<64> trash10;
+    bit<64> trash11;
+    bit<64> trash12;
+    bit<64> trash13;
+    bit<64> trash14;
+    bit<64> trash15;
+    bit<64> trash16;
+    bit<64> trash17;
+    bit<64> trash18;
+    bit<64> trash19;
+    bit<64> trash20;
+    bit<64> trash21;
+    bit<64> trash22;
+    bit<64> trash23;
+    bit<64> trash24;
+    bit<64> trash25;
+    bit<64> trash26;
+    bit<64> trash27;
+    bit<64> trash28;
+    bit<64> trash29;
+    bit<64> trash30;
+    bit<64> trash31;
+    bit<64> trash32;
+    bit<64> trash33;
+    bit<64> trash34;
+    bit<64> trash35;
+    bit<64> trash36;
+    bit<64> trash37;
+    bit<64> trash38;
+    bit<64> trash39;
+    bit<64> trash40;
+    bit<64> trash41;
+    bit<64> trash42;
+    bit<64> trash43;
+    bit<64> trash44;
+    bit<64> trash45;
+    bit<64> trash46;
+    bit<64> trash47;
+    bit<64> trash48;
+    bit<64> trash49;
+    bit<64> trash50;
+    bit<64> trash51;
+    bit<64> trash52;
+    bit<64> trash53;
+    bit<64> trash54;
+    bit<64> trash55;
+    bit<64> trash56;
+    bit<64> trash57;
+    bit<64> trash58;
+    bit<64> trash59;
+    bit<64> trash60;
+    bit<64> trash61;
+    bit<64> trash62;
+    bit<64> trash63;
+    bit<64> trash64;
 #endif
 }
 
@@ -152,6 +273,140 @@ control SwitchIngress(
             meta.trash1: exact;
             meta.trash2: exact;
 #endif
+#ifdef WDTH_128
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+#endif
+#ifdef WDTH_512
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+#endif
+#ifdef WDTH_1024
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+#endif
+#ifdef WDTH_2048
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+            meta.trash17;
+            meta.trash18;
+            meta.trash19;
+            meta.trash20;
+            meta.trash21;
+            meta.trash22;
+            meta.trash23;
+            meta.trash24;
+            meta.trash25;
+            meta.trash26;
+            meta.trash27;
+            meta.trash28;
+            meta.trash29;
+            meta.trash30;
+            meta.trash31;
+            meta.trash32;
+#endif
+#ifdef WDTH_4096
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+            meta.trash17;
+            meta.trash18;
+            meta.trash19;
+            meta.trash20;
+            meta.trash21;
+            meta.trash22;
+            meta.trash23;
+            meta.trash24;
+            meta.trash25;
+            meta.trash26;
+            meta.trash27;
+            meta.trash28;
+            meta.trash29;
+            meta.trash30;
+            meta.trash31;
+            meta.trash32;
+            meta.trash33;
+            meta.trash34;
+            meta.trash35;
+            meta.trash36;
+            meta.trash37;
+            meta.trash38;
+            meta.trash39;
+            meta.trash40;
+            meta.trash41;
+            meta.trash42;
+            meta.trash43;
+            meta.trash44;
+            meta.trash45;
+            meta.trash46;
+            meta.trash47;
+            meta.trash48;
+            meta.trash49;
+            meta.trash50;
+            meta.trash51;
+            meta.trash52;
+            meta.trash53;
+            meta.trash54;
+            meta.trash55;
+            meta.trash56;
+            meta.trash57;
+            meta.trash58;
+            meta.trash59;
+            meta.trash60;
+            meta.trash61;
+            meta.trash62;
+            meta.trash63;
+            meta.trash64;
+#endif
         }
         actions = {
             a_table2;
@@ -197,6 +452,140 @@ control SwitchIngress(
 #ifdef WDTH_64
             meta.trash1: exact;
             meta.trash2: exact;
+#endif
+#ifdef WDTH_128
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+#endif
+#ifdef WDTH_512
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+#endif
+#ifdef WDTH_1024
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+#endif
+#ifdef WDTH_2048
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+            meta.trash17;
+            meta.trash18;
+            meta.trash19;
+            meta.trash20;
+            meta.trash21;
+            meta.trash22;
+            meta.trash23;
+            meta.trash24;
+            meta.trash25;
+            meta.trash26;
+            meta.trash27;
+            meta.trash28;
+            meta.trash29;
+            meta.trash30;
+            meta.trash31;
+            meta.trash32;
+#endif
+#ifdef WDTH_4096
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+            meta.trash17;
+            meta.trash18;
+            meta.trash19;
+            meta.trash20;
+            meta.trash21;
+            meta.trash22;
+            meta.trash23;
+            meta.trash24;
+            meta.trash25;
+            meta.trash26;
+            meta.trash27;
+            meta.trash28;
+            meta.trash29;
+            meta.trash30;
+            meta.trash31;
+            meta.trash32;
+            meta.trash33;
+            meta.trash34;
+            meta.trash35;
+            meta.trash36;
+            meta.trash37;
+            meta.trash38;
+            meta.trash39;
+            meta.trash40;
+            meta.trash41;
+            meta.trash42;
+            meta.trash43;
+            meta.trash44;
+            meta.trash45;
+            meta.trash46;
+            meta.trash47;
+            meta.trash48;
+            meta.trash49;
+            meta.trash50;
+            meta.trash51;
+            meta.trash52;
+            meta.trash53;
+            meta.trash54;
+            meta.trash55;
+            meta.trash56;
+            meta.trash57;
+            meta.trash58;
+            meta.trash59;
+            meta.trash60;
+            meta.trash61;
+            meta.trash62;
+            meta.trash63;
+            meta.trash64;
 #endif
         }
         actions = {
@@ -244,6 +633,140 @@ control SwitchIngress(
             meta.trash1: exact;
             meta.trash2: exact;
 #endif
+#ifdef WDTH_128
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+#endif
+#ifdef WDTH_512
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+#endif
+#ifdef WDTH_1024
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+#endif
+#ifdef WDTH_2048
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+            meta.trash17;
+            meta.trash18;
+            meta.trash19;
+            meta.trash20;
+            meta.trash21;
+            meta.trash22;
+            meta.trash23;
+            meta.trash24;
+            meta.trash25;
+            meta.trash26;
+            meta.trash27;
+            meta.trash28;
+            meta.trash29;
+            meta.trash30;
+            meta.trash31;
+            meta.trash32;
+#endif
+#ifdef WDTH_4096
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+            meta.trash17;
+            meta.trash18;
+            meta.trash19;
+            meta.trash20;
+            meta.trash21;
+            meta.trash22;
+            meta.trash23;
+            meta.trash24;
+            meta.trash25;
+            meta.trash26;
+            meta.trash27;
+            meta.trash28;
+            meta.trash29;
+            meta.trash30;
+            meta.trash31;
+            meta.trash32;
+            meta.trash33;
+            meta.trash34;
+            meta.trash35;
+            meta.trash36;
+            meta.trash37;
+            meta.trash38;
+            meta.trash39;
+            meta.trash40;
+            meta.trash41;
+            meta.trash42;
+            meta.trash43;
+            meta.trash44;
+            meta.trash45;
+            meta.trash46;
+            meta.trash47;
+            meta.trash48;
+            meta.trash49;
+            meta.trash50;
+            meta.trash51;
+            meta.trash52;
+            meta.trash53;
+            meta.trash54;
+            meta.trash55;
+            meta.trash56;
+            meta.trash57;
+            meta.trash58;
+            meta.trash59;
+            meta.trash60;
+            meta.trash61;
+            meta.trash62;
+            meta.trash63;
+            meta.trash64;
+#endif
         }
         actions = {
             a_table4;
@@ -290,6 +813,140 @@ control SwitchIngress(
             meta.trash1: exact;
             meta.trash2: exact;
 #endif
+#ifdef WDTH_128
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+#endif
+#ifdef WDTH_512
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+#endif
+#ifdef WDTH_1024
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+#endif
+#ifdef WDTH_2048
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+            meta.trash17;
+            meta.trash18;
+            meta.trash19;
+            meta.trash20;
+            meta.trash21;
+            meta.trash22;
+            meta.trash23;
+            meta.trash24;
+            meta.trash25;
+            meta.trash26;
+            meta.trash27;
+            meta.trash28;
+            meta.trash29;
+            meta.trash30;
+            meta.trash31;
+            meta.trash32;
+#endif
+#ifdef WDTH_4096
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+            meta.trash17;
+            meta.trash18;
+            meta.trash19;
+            meta.trash20;
+            meta.trash21;
+            meta.trash22;
+            meta.trash23;
+            meta.trash24;
+            meta.trash25;
+            meta.trash26;
+            meta.trash27;
+            meta.trash28;
+            meta.trash29;
+            meta.trash30;
+            meta.trash31;
+            meta.trash32;
+            meta.trash33;
+            meta.trash34;
+            meta.trash35;
+            meta.trash36;
+            meta.trash37;
+            meta.trash38;
+            meta.trash39;
+            meta.trash40;
+            meta.trash41;
+            meta.trash42;
+            meta.trash43;
+            meta.trash44;
+            meta.trash45;
+            meta.trash46;
+            meta.trash47;
+            meta.trash48;
+            meta.trash49;
+            meta.trash50;
+            meta.trash51;
+            meta.trash52;
+            meta.trash53;
+            meta.trash54;
+            meta.trash55;
+            meta.trash56;
+            meta.trash57;
+            meta.trash58;
+            meta.trash59;
+            meta.trash60;
+            meta.trash61;
+            meta.trash62;
+            meta.trash63;
+            meta.trash64;
+#endif
         }
         actions = {
             a_table5;
@@ -329,6 +986,147 @@ control SwitchIngress(
     table t_table6 {
         key = {
             hdr.ipv4.srcAddr : exact;
+#ifdef WDTH_32
+            meta.trash1: exact;
+#endif
+#ifdef WDTH_64
+            meta.trash1: exact;
+            meta.trash2: exact;
+#endif
+#ifdef WDTH_128
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+#endif
+#ifdef WDTH_512
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+#endif
+#ifdef WDTH_1024
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+#endif
+#ifdef WDTH_2048
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+            meta.trash17;
+            meta.trash18;
+            meta.trash19;
+            meta.trash20;
+            meta.trash21;
+            meta.trash22;
+            meta.trash23;
+            meta.trash24;
+            meta.trash25;
+            meta.trash26;
+            meta.trash27;
+            meta.trash28;
+            meta.trash29;
+            meta.trash30;
+            meta.trash31;
+            meta.trash32;
+#endif
+#ifdef WDTH_4096
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+            meta.trash17;
+            meta.trash18;
+            meta.trash19;
+            meta.trash20;
+            meta.trash21;
+            meta.trash22;
+            meta.trash23;
+            meta.trash24;
+            meta.trash25;
+            meta.trash26;
+            meta.trash27;
+            meta.trash28;
+            meta.trash29;
+            meta.trash30;
+            meta.trash31;
+            meta.trash32;
+            meta.trash33;
+            meta.trash34;
+            meta.trash35;
+            meta.trash36;
+            meta.trash37;
+            meta.trash38;
+            meta.trash39;
+            meta.trash40;
+            meta.trash41;
+            meta.trash42;
+            meta.trash43;
+            meta.trash44;
+            meta.trash45;
+            meta.trash46;
+            meta.trash47;
+            meta.trash48;
+            meta.trash49;
+            meta.trash50;
+            meta.trash51;
+            meta.trash52;
+            meta.trash53;
+            meta.trash54;
+            meta.trash55;
+            meta.trash56;
+            meta.trash57;
+            meta.trash58;
+            meta.trash59;
+            meta.trash60;
+            meta.trash61;
+            meta.trash62;
+            meta.trash63;
+            meta.trash64;
+#endif
         }
         actions = {
             a_table6;
@@ -368,6 +1166,147 @@ control SwitchIngress(
     table t_table7 {
         key = {
             hdr.ipv4.dstAddr : exact;
+#ifdef WDTH_32
+            meta.trash1: exact;
+#endif
+#ifdef WDTH_64
+            meta.trash1: exact;
+            meta.trash2: exact;
+#endif
+#ifdef WDTH_128
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+#endif
+#ifdef WDTH_512
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+#endif
+#ifdef WDTH_1024
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+#endif
+#ifdef WDTH_2048
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+            meta.trash17;
+            meta.trash18;
+            meta.trash19;
+            meta.trash20;
+            meta.trash21;
+            meta.trash22;
+            meta.trash23;
+            meta.trash24;
+            meta.trash25;
+            meta.trash26;
+            meta.trash27;
+            meta.trash28;
+            meta.trash29;
+            meta.trash30;
+            meta.trash31;
+            meta.trash32;
+#endif
+#ifdef WDTH_4096
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+            meta.trash17;
+            meta.trash18;
+            meta.trash19;
+            meta.trash20;
+            meta.trash21;
+            meta.trash22;
+            meta.trash23;
+            meta.trash24;
+            meta.trash25;
+            meta.trash26;
+            meta.trash27;
+            meta.trash28;
+            meta.trash29;
+            meta.trash30;
+            meta.trash31;
+            meta.trash32;
+            meta.trash33;
+            meta.trash34;
+            meta.trash35;
+            meta.trash36;
+            meta.trash37;
+            meta.trash38;
+            meta.trash39;
+            meta.trash40;
+            meta.trash41;
+            meta.trash42;
+            meta.trash43;
+            meta.trash44;
+            meta.trash45;
+            meta.trash46;
+            meta.trash47;
+            meta.trash48;
+            meta.trash49;
+            meta.trash50;
+            meta.trash51;
+            meta.trash52;
+            meta.trash53;
+            meta.trash54;
+            meta.trash55;
+            meta.trash56;
+            meta.trash57;
+            meta.trash58;
+            meta.trash59;
+            meta.trash60;
+            meta.trash61;
+            meta.trash62;
+            meta.trash63;
+            meta.trash64;
+#endif
         }
         actions = {
             a_table7;
@@ -407,6 +1346,147 @@ control SwitchIngress(
     table t_table8 {
         key = {
             hdr.udp.srcPort : exact;
+#ifdef WDTH_32
+            meta.trash1: exact;
+#endif
+#ifdef WDTH_64
+            meta.trash1: exact;
+            meta.trash2: exact;
+#endif
+#ifdef WDTH_128
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+#endif
+#ifdef WDTH_512
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+#endif
+#ifdef WDTH_1024
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+#endif
+#ifdef WDTH_2048
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+            meta.trash17;
+            meta.trash18;
+            meta.trash19;
+            meta.trash20;
+            meta.trash21;
+            meta.trash22;
+            meta.trash23;
+            meta.trash24;
+            meta.trash25;
+            meta.trash26;
+            meta.trash27;
+            meta.trash28;
+            meta.trash29;
+            meta.trash30;
+            meta.trash31;
+            meta.trash32;
+#endif
+#ifdef WDTH_4096
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+            meta.trash17;
+            meta.trash18;
+            meta.trash19;
+            meta.trash20;
+            meta.trash21;
+            meta.trash22;
+            meta.trash23;
+            meta.trash24;
+            meta.trash25;
+            meta.trash26;
+            meta.trash27;
+            meta.trash28;
+            meta.trash29;
+            meta.trash30;
+            meta.trash31;
+            meta.trash32;
+            meta.trash33;
+            meta.trash34;
+            meta.trash35;
+            meta.trash36;
+            meta.trash37;
+            meta.trash38;
+            meta.trash39;
+            meta.trash40;
+            meta.trash41;
+            meta.trash42;
+            meta.trash43;
+            meta.trash44;
+            meta.trash45;
+            meta.trash46;
+            meta.trash47;
+            meta.trash48;
+            meta.trash49;
+            meta.trash50;
+            meta.trash51;
+            meta.trash52;
+            meta.trash53;
+            meta.trash54;
+            meta.trash55;
+            meta.trash56;
+            meta.trash57;
+            meta.trash58;
+            meta.trash59;
+            meta.trash60;
+            meta.trash61;
+            meta.trash62;
+            meta.trash63;
+            meta.trash64;
+#endif
         }
         actions = {
             a_table8;
@@ -446,6 +1526,147 @@ control SwitchIngress(
     table t_table9 {
         key = {
             hdr.udp.dstPort : exact;
+#ifdef WDTH_32
+            meta.trash1: exact;
+#endif
+#ifdef WDTH_64
+            meta.trash1: exact;
+            meta.trash2: exact;
+#endif
+#ifdef WDTH_128
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+#endif
+#ifdef WDTH_512
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+#endif
+#ifdef WDTH_1024
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+#endif
+#ifdef WDTH_2048
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+            meta.trash17;
+            meta.trash18;
+            meta.trash19;
+            meta.trash20;
+            meta.trash21;
+            meta.trash22;
+            meta.trash23;
+            meta.trash24;
+            meta.trash25;
+            meta.trash26;
+            meta.trash27;
+            meta.trash28;
+            meta.trash29;
+            meta.trash30;
+            meta.trash31;
+            meta.trash32;
+#endif
+#ifdef WDTH_4096
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+            meta.trash17;
+            meta.trash18;
+            meta.trash19;
+            meta.trash20;
+            meta.trash21;
+            meta.trash22;
+            meta.trash23;
+            meta.trash24;
+            meta.trash25;
+            meta.trash26;
+            meta.trash27;
+            meta.trash28;
+            meta.trash29;
+            meta.trash30;
+            meta.trash31;
+            meta.trash32;
+            meta.trash33;
+            meta.trash34;
+            meta.trash35;
+            meta.trash36;
+            meta.trash37;
+            meta.trash38;
+            meta.trash39;
+            meta.trash40;
+            meta.trash41;
+            meta.trash42;
+            meta.trash43;
+            meta.trash44;
+            meta.trash45;
+            meta.trash46;
+            meta.trash47;
+            meta.trash48;
+            meta.trash49;
+            meta.trash50;
+            meta.trash51;
+            meta.trash52;
+            meta.trash53;
+            meta.trash54;
+            meta.trash55;
+            meta.trash56;
+            meta.trash57;
+            meta.trash58;
+            meta.trash59;
+            meta.trash60;
+            meta.trash61;
+            meta.trash62;
+            meta.trash63;
+            meta.trash64;
+#endif
         }
         actions = {
             a_table9;
@@ -485,6 +1706,147 @@ control SwitchIngress(
     table t_table10 {
         key = {
             hdr.gtp.teid : exact;
+#ifdef WDTH_32
+            meta.trash1: exact;
+#endif
+#ifdef WDTH_64
+            meta.trash1: exact;
+            meta.trash2: exact;
+#endif
+#ifdef WDTH_128
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+#endif
+#ifdef WDTH_512
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+#endif
+#ifdef WDTH_1024
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+#endif
+#ifdef WDTH_2048
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+            meta.trash17;
+            meta.trash18;
+            meta.trash19;
+            meta.trash20;
+            meta.trash21;
+            meta.trash22;
+            meta.trash23;
+            meta.trash24;
+            meta.trash25;
+            meta.trash26;
+            meta.trash27;
+            meta.trash28;
+            meta.trash29;
+            meta.trash30;
+            meta.trash31;
+            meta.trash32;
+#endif
+#ifdef WDTH_4096
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+            meta.trash17;
+            meta.trash18;
+            meta.trash19;
+            meta.trash20;
+            meta.trash21;
+            meta.trash22;
+            meta.trash23;
+            meta.trash24;
+            meta.trash25;
+            meta.trash26;
+            meta.trash27;
+            meta.trash28;
+            meta.trash29;
+            meta.trash30;
+            meta.trash31;
+            meta.trash32;
+            meta.trash33;
+            meta.trash34;
+            meta.trash35;
+            meta.trash36;
+            meta.trash37;
+            meta.trash38;
+            meta.trash39;
+            meta.trash40;
+            meta.trash41;
+            meta.trash42;
+            meta.trash43;
+            meta.trash44;
+            meta.trash45;
+            meta.trash46;
+            meta.trash47;
+            meta.trash48;
+            meta.trash49;
+            meta.trash50;
+            meta.trash51;
+            meta.trash52;
+            meta.trash53;
+            meta.trash54;
+            meta.trash55;
+            meta.trash56;
+            meta.trash57;
+            meta.trash58;
+            meta.trash59;
+            meta.trash60;
+            meta.trash61;
+            meta.trash62;
+            meta.trash63;
+            meta.trash64;
+#endif
         }
         actions = {
             a_table10;
@@ -522,6 +1884,147 @@ control SwitchIngress(
     table t_table11 {
         key = {
             hdr.ipv4_inner.srcAddr : exact;
+#ifdef WDTH_32
+            meta.trash1: exact;
+#endif
+#ifdef WDTH_64
+            meta.trash1: exact;
+            meta.trash2: exact;
+#endif
+#ifdef WDTH_128
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+#endif
+#ifdef WDTH_512
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+#endif
+#ifdef WDTH_1024
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+#endif
+#ifdef WDTH_2048
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+            meta.trash17;
+            meta.trash18;
+            meta.trash19;
+            meta.trash20;
+            meta.trash21;
+            meta.trash22;
+            meta.trash23;
+            meta.trash24;
+            meta.trash25;
+            meta.trash26;
+            meta.trash27;
+            meta.trash28;
+            meta.trash29;
+            meta.trash30;
+            meta.trash31;
+            meta.trash32;
+#endif
+#ifdef WDTH_4096
+            meta.trash1;
+            meta.trash2;
+            meta.trash3;
+            meta.trash4;
+            meta.trash5;
+            meta.trash6;
+            meta.trash7;
+            meta.trash8;
+            meta.trash9;
+            meta.trash10;
+            meta.trash11;
+            meta.trash12;
+            meta.trash13;
+            meta.trash14;
+            meta.trash15;
+            meta.trash16;
+            meta.trash17;
+            meta.trash18;
+            meta.trash19;
+            meta.trash20;
+            meta.trash21;
+            meta.trash22;
+            meta.trash23;
+            meta.trash24;
+            meta.trash25;
+            meta.trash26;
+            meta.trash27;
+            meta.trash28;
+            meta.trash29;
+            meta.trash30;
+            meta.trash31;
+            meta.trash32;
+            meta.trash33;
+            meta.trash34;
+            meta.trash35;
+            meta.trash36;
+            meta.trash37;
+            meta.trash38;
+            meta.trash39;
+            meta.trash40;
+            meta.trash41;
+            meta.trash42;
+            meta.trash43;
+            meta.trash44;
+            meta.trash45;
+            meta.trash46;
+            meta.trash47;
+            meta.trash48;
+            meta.trash49;
+            meta.trash50;
+            meta.trash51;
+            meta.trash52;
+            meta.trash53;
+            meta.trash54;
+            meta.trash55;
+            meta.trash56;
+            meta.trash57;
+            meta.trash58;
+            meta.trash59;
+            meta.trash60;
+            meta.trash61;
+            meta.trash62;
+            meta.trash63;
+            meta.trash64;
+#endif
         }
         actions = {
             set_egress_port;
