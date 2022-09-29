@@ -327,31 +327,76 @@ control SwitchIngress(
 #ifdef TBL_2
         t_table2.apply();
 #endif
-#ifdef TBL_3
+#ifdef TBL_3 
+        t_table2.apply();
         t_table3.apply();
 #endif
 #ifdef TBL_4
+        t_table2.apply();
         t_table4.apply();
+        t_table3.apply();
 #endif
 #ifdef TBL_5
+        t_table2.apply();
+        t_table4.apply();
+        t_table3.apply();
         t_table5.apply();
 #endif
 #ifdef TBL_6
+        t_table2.apply();
+        t_table4.apply();
+        t_table3.apply();
+        t_table5.apply();
         t_table6.apply();
 #endif
 #ifdef TBL_7
+        t_table2.apply();
+        t_table4.apply();
+        t_table3.apply();
+        t_table5.apply();
+        t_table6.apply();
         t_table7.apply();
 #endif
 #ifdef TBL_8
+        t_table2.apply();
+        t_table4.apply();
+        t_table3.apply();
+        t_table5.apply();
+        t_table6.apply();
+        t_table7.apply();
         t_table8.apply();
 #endif
 #ifdef TBL_9
+        t_table2.apply();
+        t_table4.apply();
+        t_table3.apply();
+        t_table5.apply();
+        t_table6.apply();
+        t_table7.apply();
+        t_table8.apply();
         t_table9.apply();
 #endif
 #ifdef TBL_10
+        t_table2.apply();
+        t_table4.apply();
+        t_table3.apply();
+        t_table5.apply();
+        t_table6.apply();
+        t_table7.apply();
+        t_table8.apply();
+        t_table9.apply();
         t_table10.apply();
 #endif
 #ifdef TBL_11
+        t_table2.apply();
+        t_table4.apply();
+        t_table3.apply();
+        t_table5.apply();
+        t_table6.apply();
+        t_table7.apply();
+        t_table8.apply();
+        t_table9.apply();
+        t_table10.apply();
         t_table11.apply();
 #endif
     }
