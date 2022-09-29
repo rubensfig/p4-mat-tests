@@ -18,7 +18,6 @@ for i in SIZES:
     print(command)
     # os.system(COMPILE_COMMAND + SIZE_FLAG )
 
-    for root, subdirs, files in os.walk("mat-tests.tofino"):
-        if "power.json" in files:
-            js = json.loads(root + files)
+    js  = json.loads("mat-tests.tofino/pipe/logs")
+    print(js["total_power"])
 
