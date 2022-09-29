@@ -129,7 +129,27 @@ control SwitchIngress(
         actions = {
             a_table2;
         }
+ifdef TBL_SIZE_1
+        size = 1;
+#endif
+ifdef TBL_SIZE_64
+        size = 64;
+#endif
+ifdef TBL_SIZE_128
+        size = 128;
+#endif
+ifdef TBL_SIZE_512
+        size = 512;
+#endif
+ifdef TBL_SIZE_1024
+        size = 1024;
+#endif
+ifdef TBL_SIZE_2048
+        size = 2048;
+#endif
+ifdef TBL_SIZE_4096
         size = 4096;
+#endif
     }
 
     action a_table3(bit<16> etherType) {
@@ -148,7 +168,27 @@ control SwitchIngress(
         actions = {
             a_table3;
         }
+ifdef TBL_SIZE_1
+        size = 1;
+#endif
+ifdef TBL_SIZE_64
+        size = 64;
+#endif
+ifdef TBL_SIZE_128
+        size = 128;
+#endif
+ifdef TBL_SIZE_512
+        size = 512;
+#endif
+ifdef TBL_SIZE_1024
+        size = 1024;
+#endif
+ifdef TBL_SIZE_2048
+        size = 2048;
+#endif
+ifdef TBL_SIZE_4096
         size = 4096;
+#endif
     }
 
     action a_table4(bit<8> protocol) {
@@ -167,7 +207,27 @@ control SwitchIngress(
         actions = {
             a_table4;
         }
+ifdef TBL_SIZE_1
+        size = 1;
+#endif
+ifdef TBL_SIZE_64
+        size = 64;
+#endif
+ifdef TBL_SIZE_128
+        size = 128;
+#endif
+ifdef TBL_SIZE_512
+        size = 512;
+#endif
+ifdef TBL_SIZE_1024
+        size = 1024;
+#endif
+ifdef TBL_SIZE_2048
+        size = 2048;
+#endif
+ifdef TBL_SIZE_4096
         size = 4096;
+#endif
     }
 
     action a_table5(bit<32> srcAddr) {
@@ -186,7 +246,27 @@ control SwitchIngress(
         actions = {
             a_table5;
         }
+ifdef TBL_SIZE_1
+        size = 1;
+#endif
+ifdef TBL_SIZE_64
+        size = 64;
+#endif
+ifdef TBL_SIZE_128
+        size = 128;
+#endif
+ifdef TBL_SIZE_512
+        size = 512;
+#endif
+ifdef TBL_SIZE_1024
+        size = 1024;
+#endif
+ifdef TBL_SIZE_2048
+        size = 2048;
+#endif
+ifdef TBL_SIZE_4096
         size = 4096;
+#endif
     }
 
     action a_table6(bit<32> dstAddr) {
@@ -205,7 +285,27 @@ control SwitchIngress(
         actions = {
             a_table6;
         }
+ifdef TBL_SIZE_1
+        size = 1;
+#endif
+ifdef TBL_SIZE_64
+        size = 64;
+#endif
+ifdef TBL_SIZE_128
+        size = 128;
+#endif
+ifdef TBL_SIZE_512
+        size = 512;
+#endif
+ifdef TBL_SIZE_1024
+        size = 1024;
+#endif
+ifdef TBL_SIZE_2048
+        size = 2048;
+#endif
+ifdef TBL_SIZE_4096
         size = 4096;
+#endif
     }
 
     action a_table7(bit<16> srcPort) {
@@ -224,7 +324,27 @@ control SwitchIngress(
         actions = {
             a_table7;
         }
+ifdef TBL_SIZE_1
+        size = 1;
+#endif
+ifdef TBL_SIZE_64
+        size = 64;
+#endif
+ifdef TBL_SIZE_128
+        size = 128;
+#endif
+ifdef TBL_SIZE_512
+        size = 512;
+#endif
+ifdef TBL_SIZE_1024
+        size = 1024;
+#endif
+ifdef TBL_SIZE_2048
+        size = 2048;
+#endif
+ifdef TBL_SIZE_4096
         size = 4096;
+#endif
     }
 
     action a_table8(bit<16> dstPort) {
@@ -243,7 +363,27 @@ control SwitchIngress(
         actions = {
             a_table8;
         }
+ifdef TBL_SIZE_1
+        size = 1;
+#endif
+ifdef TBL_SIZE_64
+        size = 64;
+#endif
+ifdef TBL_SIZE_128
+        size = 128;
+#endif
+ifdef TBL_SIZE_512
+        size = 512;
+#endif
+ifdef TBL_SIZE_1024
+        size = 1024;
+#endif
+ifdef TBL_SIZE_2048
+        size = 2048;
+#endif
+ifdef TBL_SIZE_4096
         size = 4096;
+#endif
     }
 
     action a_table9(bit<32> teid) {
@@ -262,7 +402,27 @@ control SwitchIngress(
         actions = {
             a_table9;
         }
+ifdef TBL_SIZE_1
+        size = 1;
+#endif
+ifdef TBL_SIZE_64
+        size = 64;
+#endif
+ifdef TBL_SIZE_128
+        size = 128;
+#endif
+ifdef TBL_SIZE_512
+        size = 512;
+#endif
+ifdef TBL_SIZE_1024
+        size = 1024;
+#endif
+ifdef TBL_SIZE_2048
+        size = 2048;
+#endif
+ifdef TBL_SIZE_4096
         size = 4096;
+#endif
     }
 
     action a_table10(bit<32> srcAddr) {
@@ -281,7 +441,27 @@ control SwitchIngress(
         actions = {
             a_table10;
         }
+ifdef TBL_SIZE_1
+        size = 1;
+#endif
+ifdef TBL_SIZE_64
+        size = 64;
+#endif
+ifdef TBL_SIZE_128
+        size = 128;
+#endif
+ifdef TBL_SIZE_512
+        size = 512;
+#endif
+ifdef TBL_SIZE_1024
+        size = 1024;
+#endif
+ifdef TBL_SIZE_2048
+        size = 2048;
+#endif
+ifdef TBL_SIZE_4096
         size = 4096;
+#endif
     }
 
     action set_egress_port(PortId_t port) {
@@ -298,7 +478,27 @@ control SwitchIngress(
         actions = {
             set_egress_port;
         }
+ifdef TBL_SIZE_1
+        size = 1;
+#endif
+ifdef TBL_SIZE_64
+        size = 64;
+#endif
+ifdef TBL_SIZE_128
+        size = 128;
+#endif
+ifdef TBL_SIZE_512
+        size = 512;
+#endif
+ifdef TBL_SIZE_1024
+        size = 1024;
+#endif
+ifdef TBL_SIZE_2048
+        size = 2048;
+#endif
+ifdef TBL_SIZE_4096
         size = 4096;
+#endif
     }
 
 
