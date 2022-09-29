@@ -19,6 +19,6 @@ for i in SIZES:
     # os.system(COMPILE_COMMAND + SIZE_FLAG )
 
     with open("mat-tests.tofino/pipe/logs/power.json") as f:
-        data = json.load(file)
+        data = json.load(f)
         print(data["total_power"])
 
