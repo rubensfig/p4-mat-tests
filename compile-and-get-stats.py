@@ -18,6 +18,7 @@ for i in SIZES:
     print(command)
     # os.system(COMPILE_COMMAND + SIZE_FLAG )
 
-    js  = json.loads("mat-tests.tofino/pipe/logs/power.json")
-    print(js["total_power"])
+    with open("mat-tests.tofino/pipe/logs/power.json") as f:
+        data = json.load(file)
+        print(data["total_power"])
 
