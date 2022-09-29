@@ -9,7 +9,7 @@ TCAM_FLAG = "-D TCAM "
 SIZES = [1, 64, 128, 512, 1024, 2048, 4096]
 SIZE_FLAG = "-D TBL_SIZE_"
 
-pwr_df = pd.DataFrame(columns="table_size", "type", "gress", "power")
+pwr_df = pd.DataFrame(columns=["table_size", "type", "gress", "power"])
 for i in SIZES:
     command = COMPILE_COMMAND + SIZE_FLAG + str(i)
     print(command)
