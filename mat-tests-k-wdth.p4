@@ -224,12 +224,7 @@ control SwitchIngress(
     table t_table4 {
         key = {
             hdr.ethernet.etherType : exact;
-#ifdef WDTH_32
-    wd_32 meta.trash1;
-#endif
-#ifdef WDTH_64
-    wd_64 meta.trash1;
-#endif
+            meta.trash1: exact;
         }
         actions = {
             a_table4;
