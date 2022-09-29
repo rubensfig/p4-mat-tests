@@ -8,8 +8,8 @@ import os
 import json
 import ipaddress
 
-COMPILE_COMMAND = "bf-p4c mat-tests.p4 --display-power-budget -g"
-TCAM_FLAG = "-D TCAM"
+COMPILE_COMMAND = "bf-p4c mat-tests.p4 --display-power-budget -g "
+TCAM_FLAG = "-D TCAM "
 SIZES = [1, 64, 128, 512, 1024, 2048, 4096]
 SIZE_FLAG = "-D TBL_SIZE_"
 
