@@ -28,125 +28,7 @@ struct metadata_t {
     bit<64> trash5;
     bit<64> trash6;
     bit<64> trash7;
- // bit<64> trash8;
-#endif
-#ifdef WDTH_1024
-    bit<64> trash1;
-    bit<64> trash2;
-    bit<64> trash3;
-    bit<64> trash4;
-    bit<64> trash5;
-    bit<64> trash6;
-    bit<64> trash7;
-    bit<64> trash8;
-    bit<64> trash9;
-    bit<64> trash10;
-    bit<64> trash11;
-    bit<64> trash12;
-    bit<64> trash13;
-    bit<64> trash14;
-    bit<64> trash15;
-    bit<64> trash16;
-#endif
-#ifdef WDTH_2048
-    bit<64> trash1;
-    bit<64> trash2;
-    bit<64> trash3;
-    bit<64> trash4;
-    bit<64> trash5;
-    bit<64> trash6;
-    bit<64> trash7;
-    bit<64> trash8;
-    bit<64> trash9;
-    bit<64> trash10;
-    bit<64> trash11;
-    bit<64> trash12;
-    bit<64> trash13;
-    bit<64> trash14;
-    bit<64> trash15;
-    bit<64> trash16;
-    bit<64> trash17;
-    bit<64> trash18;
-    bit<64> trash19;
-    bit<64> trash20;
-    bit<64> trash21;
-    bit<64> trash22;
-    bit<64> trash23;
-    bit<64> trash24;
-    bit<64> trash25;
-    bit<64> trash26;
-    bit<64> trash27;
-    bit<64> trash28;
-    bit<64> trash29;
-    bit<64> trash30;
-    bit<64> trash31;
-    bit<64> trash32;
-#endif
-#ifdef WDTH_4096
-    bit<64> trash1;
-    bit<64> trash2;
-    bit<64> trash3;
-    bit<64> trash4;
-    bit<64> trash5;
-    bit<64> trash6;
-    bit<64> trash7;
-    bit<64> trash8;
-    bit<64> trash9;
-    bit<64> trash10;
-    bit<64> trash11;
-    bit<64> trash12;
-    bit<64> trash13;
-    bit<64> trash14;
-    bit<64> trash15;
-    bit<64> trash16;
-    bit<64> trash17;
-    bit<64> trash18;
-    bit<64> trash19;
-    bit<64> trash20;
-    bit<64> trash21;
-    bit<64> trash22;
-    bit<64> trash23;
-    bit<64> trash24;
-    bit<64> trash25;
-    bit<64> trash26;
-    bit<64> trash27;
-    bit<64> trash28;
-    bit<64> trash29;
-    bit<64> trash30;
-    bit<64> trash31;
-    bit<64> trash32;
-    bit<64> trash33;
-    bit<64> trash34;
-    bit<64> trash35;
-    bit<64> trash36;
-    bit<64> trash37;
-    bit<64> trash38;
-    bit<64> trash39;
-    bit<64> trash40;
-    bit<64> trash41;
-    bit<64> trash42;
-    bit<64> trash43;
-    bit<64> trash44;
-    bit<64> trash45;
-    bit<64> trash46;
-    bit<64> trash47;
-    bit<64> trash48;
-    bit<64> trash49;
-    bit<64> trash50;
-    bit<64> trash51;
-    bit<64> trash52;
-    bit<64> trash53;
-    bit<64> trash54;
-    bit<64> trash55;
-    bit<64> trash56;
-    bit<64> trash57;
-    bit<64> trash58;
-    bit<64> trash59;
-    bit<64> trash60;
-    bit<64> trash61;
-    bit<64> trash62;
-    bit<64> trash63;
-    bit<64> trash64;
+
 #endif
 }
 
@@ -287,7 +169,7 @@ control SwitchIngress(
             meta.trash5: exact;
             meta.trash6: exact;
             meta.trash7: exact;
-            meta.trash8: exact;
+
 #endif
         }
         actions = {
@@ -350,7 +232,7 @@ control SwitchIngress(
             meta.trash5: exact;
             meta.trash6: exact;
             meta.trash7: exact;
-            meta.trash8: exact;
+
 #endif
         }
         actions = {
@@ -412,7 +294,7 @@ control SwitchIngress(
             meta.trash5: exact;
             meta.trash6: exact;
             meta.trash7: exact;
-            meta.trash8: exact;
+
 #endif
         }
         actions = {
@@ -475,7 +357,7 @@ control SwitchIngress(
             meta.trash5: exact;
             meta.trash6: exact;
             meta.trash7: exact;
-            meta.trash8: exact;
+
 #endif
         }
         actions = {
@@ -538,7 +420,7 @@ control SwitchIngress(
             meta.trash5: exact;
             meta.trash6: exact;
             meta.trash7: exact;
-            meta.trash8: exact;
+
 #endif
         }
         actions = {
@@ -600,7 +482,7 @@ control SwitchIngress(
             meta.trash5: exact;
             meta.trash6: exact;
             meta.trash7: exact;
-            meta.trash8: exact;
+
 #endif
         }
         actions = {
@@ -662,7 +544,7 @@ control SwitchIngress(
             meta.trash5: exact;
             meta.trash6: exact;
             meta.trash7: exact;
-            meta.trash8: exact;
+
 #endif
         }
         actions = {
@@ -724,7 +606,7 @@ control SwitchIngress(
             meta.trash5: exact;
             meta.trash6: exact;
             meta.trash7: exact;
-            meta.trash8: exact;
+
 #endif
         }
         actions = {
@@ -786,7 +668,7 @@ control SwitchIngress(
             meta.trash5: exact;
             meta.trash6: exact;
             meta.trash7: exact;
-            meta.trash8: exact;
+
 #endif
         }
         actions = {
@@ -846,7 +728,6 @@ control SwitchIngress(
             meta.trash5: exact;
             meta.trash6: exact;
             meta.trash7: exact;
-            meta.trash8: exact;
 #endif
         }
         actions = {
