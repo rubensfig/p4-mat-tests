@@ -25,9 +25,9 @@ for i in SIZES:
     pwr_df.append(
             pd.Series(
                 [i, tp, data["total_power"][0]["gress"], data["total_power"][0]["power"]],
-                index = pwr_df.columns,
+                index = pwr_df.columns),
                 ignore_index=True
-                ))
+)
      
 
 pwr_df.to_csv("power_table_size.csv")
