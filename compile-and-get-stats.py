@@ -10,16 +10,18 @@ TBL_SIZES = [1, 64, 128, 512, 1024, 2048, 4096]
 WDTH_SIZES = [32, 64, 128, 512]
 SIZE_FLAG = " -D TBL_SIZE_"
 WDTH_FLAG = " -D WDTH_"
-PROGRAM = " mat-tests-k-wdth.p4"
+TABLES = [2,3,4,5,6,7,8,9,10]
+TBL_FLAG = " -D TBL_ "
+PROGRAM = " mat-tests-mat.p4"
 
 pwr_df = pd.DataFrame(columns=["table_size", "type", "gress", "power"])
-for i in WDTH_SIZES:
-    command = COMPILE_COMMAND + SIZE_FLAG + str(1024) + WDTH_FLAG + str(i) + PROGRAM
+for i in TABLES:
+    command = COMPILE_COMMAND + SIZE_FLAG + str(1) + TBL_FLAG + str(i) + PROGRAM
     print(command)
     os.system(command)
 
     data = None
-    with open("mat-tests-k-wdth.tofino/pipe/logs/power.json") as f:
+    with open("mat-tests-mat.tofino/pipe/logs/power.json") as f:
         data = json.load(f)
     print(data["total_power"])
 
@@ -32,4 +34,4 @@ for i in WDTH_SIZES:
                 ignore_index=True
     )
      
-pwr_df.to_csv("power_table_size_k_wdth.csv")
+pwr_df.to_csv("power_table_size_mat.csv")
