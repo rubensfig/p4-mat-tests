@@ -23,7 +23,7 @@ for i in SIZES:
     pwr_df["gress"] = data["total_power"][0]["gress"]
     pwr_df["power"] = data["total_power"][0]["power"]
     pwr_df["table_size"] = i
-    pwr_df["type"] = "sram" if TCAM_FLAG not in COMMAND
+    pwr_df["type"] = "sram" if TCAM_FLAG not in command
 
     pwr_df.to_csv("power_table_size.csv")
 
