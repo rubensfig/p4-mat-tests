@@ -21,10 +21,11 @@ struct wd_64 {
 struct metadata_t {
     bit<1> usds;
 #ifdef WDTH_32
-    wd_32 trash1;
+    bit<32> trash1;
 #endif
 #ifdef WDTH_64
-    wd_64 trash1;
+    bit<32> trash1;
+    bit<32> trash2;
 #endif
 }
 
@@ -144,7 +145,13 @@ control SwitchIngress(
     table t_table2 {
         key = {
             hdr.ethernet.srcAddr : exact;
+#ifdef WDTH_32
             meta.trash1: exact;
+#endif
+#ifdef WDTH_64
+            meta.trash1: exact;
+            meta.trash2: exact;
+#endif
         }
         actions = {
             a_table2;
@@ -184,7 +191,13 @@ control SwitchIngress(
     table t_table3 {
         key = {
             hdr.ethernet.dstAddr : exact;
+#ifdef WDTH_32
             meta.trash1: exact;
+#endif
+#ifdef WDTH_64
+            meta.trash1: exact;
+            meta.trash2: exact;
+#endif
         }
         actions = {
             a_table3;
@@ -224,7 +237,13 @@ control SwitchIngress(
     table t_table4 {
         key = {
             hdr.ethernet.etherType : exact;
+#ifdef WDTH_32
             meta.trash1: exact;
+#endif
+#ifdef WDTH_64
+            meta.trash1: exact;
+            meta.trash2: exact;
+#endif
         }
         actions = {
             a_table4;
@@ -264,6 +283,13 @@ control SwitchIngress(
     table t_table5 {
         key = {
             hdr.ipv4.protocol : exact;
+#ifdef WDTH_32
+            meta.trash1: exact;
+#endif
+#ifdef WDTH_64
+            meta.trash1: exact;
+            meta.trash2: exact;
+#endif
         }
         actions = {
             a_table5;
