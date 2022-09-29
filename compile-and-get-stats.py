@@ -11,7 +11,7 @@ WDTH_SIZES = [32, 64, 128, 512]
 SIZE_FLAG = " -D TBL_SIZE_"
 WDTH_FLAG = " -D WDTH_"
 TABLES = [2,3,4,5,6,7,8,9,10]
-TBL_FLAG = " -D TBL_ "
+TBL_FLAG = " -D TBL_"
 PROGRAM = " mat-tests-mat.p4"
 
 pwr_df = pd.DataFrame(columns=["table_size", "type", "gress", "power"])
