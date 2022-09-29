@@ -144,12 +144,7 @@ control SwitchIngress(
     table t_table2 {
         key = {
             hdr.ethernet.srcAddr : exact;
-#ifdef WDTH_32
-    wd_32 meta.trash1: exact;
-#endif
-#ifdef WDTH_64
-    wd_64 meta.trash1: exact;
-#endif
+            meta.trash1: exact;
         }
         actions = {
             a_table2;
@@ -189,12 +184,7 @@ control SwitchIngress(
     table t_table3 {
         key = {
             hdr.ethernet.dstAddr : exact;
-#ifdef WDTH_32
-    wd_32 meta.trash1;
-#endif
-#ifdef WDTH_64
-    wd_64 meta.trash1;
-#endif
+            meta.trash1: exact;
         }
         actions = {
             a_table3;
