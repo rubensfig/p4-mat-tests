@@ -145,10 +145,10 @@ control SwitchIngress(
         key = {
             hdr.ethernet.srcAddr : exact;
 #ifdef WDTH_32
-    wd_32 meta.trash1;
+    wd_32 meta.trash1: exact;
 #endif
 #ifdef WDTH_64
-    wd_64 meta.trash1;
+    wd_64 meta.trash1: exact;
 #endif
         }
         actions = {
