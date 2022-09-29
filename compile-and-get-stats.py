@@ -19,7 +19,7 @@ for i in WDTH_SIZES:
     os.system(command)
 
     data = None
-    with open("mat-tests.tofino/pipe/logs/power.json") as f:
+    with open("mat-tests-k-wdth.tofino/pipe/logs/power.json") as f:
         data = json.load(f)
     print(data["total_power"])
 
