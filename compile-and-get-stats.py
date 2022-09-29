@@ -22,12 +22,12 @@ for i in SIZES:
 
     tp = "sram" if TCAM_FLAG not in command else "tcam"
     #df_tmp = pd.DataFrame([i, tp, data["total_power"][0]["gress"], data["total_power"][0]["power"]], columns = {"table_size", "type", "gress", "power"})
-    pwr_df.append(
+    pwr_df = pwr_df.append(
             pd.Series(
                 [i, tp, data["total_power"][0]["gress"], data["total_power"][0]["power"]],
                 index = pwr_df.columns),
                 ignore_index=True
-)
+    )
      
 
 pwr_df.to_csv("power_table_size.csv")
