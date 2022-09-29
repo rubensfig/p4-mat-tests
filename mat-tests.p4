@@ -132,7 +132,7 @@ control SwitchIngress(
 #ifdef TBL_SIZE_1
         size = 1;
 #endif
-ifdef TBL_SIZE_64
+#ifdef TBL_SIZE_64
         size = 64;
 #endif
 #ifdef TBL_SIZE_128
