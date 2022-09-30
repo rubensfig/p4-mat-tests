@@ -123,6 +123,10 @@ control SwitchIngress(
         }
         size = 1;
     }
+apply{
+    t_table1.apply();
+
+    }
 
 }
 
