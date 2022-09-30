@@ -119,7 +119,7 @@ control SwitchIngress(
             meta.trash1: exact;
         }
         actions = {
-            a_set_port;
+            a_us_ds;
         }
         size = 1;
     }
