@@ -7,7 +7,7 @@
 
 struct metadata_t {
 #ifdef SZ_9
-    bit<1> trash1;
+    bit<9> trash1;
 #endif
 #ifdef SZ_25
     bit<16> trash1;

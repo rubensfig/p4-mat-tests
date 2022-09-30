@@ -11,17 +11,19 @@ WDTH_SIZES = [32, 64, 128, 512]
 SIZE_FLAG = " -D TBL_SIZE_"
 WDTH_FLAG = " -D WDTH_"
 TABLES = [2,3,4,5,6,7,8,9,10]
+K_WDTH_SIZES = [9, 25, 41, 73, 105, 153, 201]
 TBL_FLAG = " -D TBL_"
-PROGRAM = " mat-tests-mat.p4"
+K_WDTH_FLAG = " -D SZ_"
+PROGRAM = " mat-tests-sram-key.p4"
 
 pwr_df = pd.DataFrame(columns=["table_size", "type", "gress", "power"])
-for i in TABLES:
-    command = COMPILE_COMMAND + SIZE_FLAG + str(1) + TBL_FLAG + str(i) + PROGRAM
+for i in K_WDTH_SIZES:
+    command = COMPILE_COMMAND + K_DWDTH_FLAG + str(i) + PROGRAM
     print(command)
     os.system(command)
 
     data = None
-    with open("mat-tests-mat.tofino/pipe/logs/power.json") as f:
+    with open("mat-tests-sram-key.tofino/pipe/logs/power.json") as f:
         data = json.load(f)
     print(data["total_power"])
 
@@ -34,4 +36,4 @@ for i in TABLES:
                 ignore_index=True
     )
      
-pwr_df.to_csv("power_table_size_mat.csv")
+pwr_df.to_csv("power_table_size_sram_key.csv")
