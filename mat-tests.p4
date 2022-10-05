@@ -557,8 +557,6 @@ control SwitchEgressDeparser(packet_out pkt, inout headers_t hdr, in metadata_t 
 // Empty Egress Deparser
 // ---------------------------------------------------------------------------
 parser SwitchEmptyParser(packet_in pkt, out headers_t hdr, out metadata_t meta, out ingress_intrinsic_metadata_t ig_intr_md) {
-    TofinoEgressParser() tofino_parser;
-
     state start {
         transition accept;
     }
@@ -603,4 +601,4 @@ Pipeline(SwitchIngressParser(),
     SwitchEgress(),
     SwitchEgressDeparser()) pipe;
 
-Switch(empty, empty, pipe, empty) main;
+Switch(empty, pipe) main;
