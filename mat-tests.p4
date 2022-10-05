@@ -555,8 +555,7 @@ control SwitchEgressDeparser(packet_out pkt, inout headers_t hdr, in metadata_t 
 }
 
 
-PipelineEmpty(
-    SwitchEmptyParser(),
+PipelineEmpty(SwitchEmptyParser(),
     SwitchEmpty(),
     SwitchEmptyDeparser(),
     SwitchEgressParser(),
