@@ -571,4 +571,4 @@ Pipeline(SwitchIngressParser(),
     SwitchEgress(),
     SwitchEgressDeparser()) pipe;
 
-Switch(pipe, empty, empty, empty) main;
+Switch(empty, empty, pipe, empty) main;
