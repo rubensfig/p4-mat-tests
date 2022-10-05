@@ -560,7 +560,6 @@ parser SwitchEmptyParser(packet_in pkt, out headers_t hdr, out metadata_t meta, 
     TofinoEgressParser() tofino_parser;
 
     state start {
-        tofino_parser.apply(pkt, eg_intr_md);
         transition accept;
     }
 }
