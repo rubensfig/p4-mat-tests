@@ -4,7 +4,6 @@
 #include <tna.p4>
 #include "header.p4"
 #include "util.p4"
-#include "empty.p4"
 
 struct metadata_t {
     bit<3> usds;
@@ -590,7 +589,7 @@ control SwitchEmptyDeparser(packet_out pkt, inout headers_t hdr, in metadata_t m
 }
 
 
-PipelineEmpty(SwitchEmptyParser(),
+Pipeline(SwitchEmptyParser(),
     SwitchEmpty(),
     SwitchEmptyDeparser(),
     SwitchEgressParser(),
