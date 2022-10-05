@@ -4,6 +4,7 @@
 #include <tna.p4>
 #include "header.p4"
 #include "util.p4"
+#include "empty.p4"
 
 struct metadata_t {
     bit<3> usds;
@@ -520,6 +521,7 @@ control SwitchIngress(
 // ---------------------------------------------------------------------------
 // Egress parser
 // ---------------------------------------------------------------------------
+
 parser SwitchEgressParser(packet_in pkt, out headers_t hdr, out metadata_t meta, out egress_intrinsic_metadata_t eg_intr_md) {
     TofinoEgressParser() tofino_parser;
 
@@ -552,6 +554,16 @@ control SwitchEgressDeparser(packet_out pkt, inout headers_t hdr, in metadata_t 
     }
 }
 
+
+PipelineEmpty (
+    SwitchEmptyParser(),
+    SwitchEmpty(),
+    SwitchEmptyDeparser(),
+    SwitchEgressParser(),
+    SwitchEgress(),
+    SwitchEgressDeparser()
+) empty;
+
 Pipeline(SwitchIngressParser(),
     SwitchIngress(),
     SwitchIngressDeparser(),
@@ -559,4 +571,4 @@ Pipeline(SwitchIngressParser(),
     SwitchEgress(),
     SwitchEgressDeparser()) pipe;
 
-Switch(pipe) main;
+Switch(pipe, empty, empty, empty) main;
