@@ -104,7 +104,7 @@ interface = gc.ClientInterface(
     "{}:{}".format(bfrt_ip, bfrt_port), client_id=0, device_id=0
 )
 
-bfrt_info = interface.bfrt_info_get("mat-tests")
+bfrt_info = interface.bfrt_info_get("mat-tests-mat")
 interface.bind_pipeline_config(p4_name=bfrt_info.p4_name)
 
 sessions = Session.read_sessions_from_file("./sessions.json")
