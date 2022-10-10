@@ -111,158 +111,73 @@ sessions = Session.read_sessions_from_file("./sessions.json")
 
 LIMIT = 4096
 
-#
-key = {
-        '$DEV_PORT': 288,
-      }
-data = {
-        '$SPEED': 'BF_SPEED_100G',
-        '$FEC': 'BF_FEC_TYP_REED_SOLOMON',
-        '$PORT_ENABLE': True
-        }
-data_action=''
-bfrt_add_entry(bfrt_info, target, '$PORT', data_action, key, data)
-#
+PORTS = [
+288,
+292,
+296,
+300,
+304,
+308,
+312,
+316,
+156,
+152,
+148,
+144,
+140,
+136,
+132,
+128,
+  0,
+  4,
+  8,
+ 12,
+ 16,
+ 20,
+ 24,
+ 28,
+444,
+440,
+436,
+432,
+428,
+424,
+420,
+416,
+176,
+180,
+184,
+188,
+172,
+284,
+280,
+276,
+272,
+268,
+400,
+404,
+408,
+412,
+396,
+ 60,
+ 56,
+ 52,
+ 48,
+ 44,
+260,
+]
 
-#
-key = {
-        '$DEV_PORT': 292,
-      }
-data = {
-        '$SPEED': 'BF_SPEED_100G',
-        '$FEC': 'BF_FEC_TYP_REED_SOLOMON',
-        '$PORT_ENABLE': True
-        }
-data_action=''
-bfrt_add_entry(bfrt_info, target, '$PORT', data_action, key, data)
-#
+for i in ports: 
 
-for i, v in sessions.items():
-    if int(i) > LIMIT:
-        break
-    #
     key = {
-            'ig_intr_md.ingress_port': IG_PORT,
+            '$DEV_PORT': i,
           }
     data = {
-            'srcAddr': mac_str_to_int(v.client_mac)
+            '$SPEED': 'BF_SPEED_100G',
+            '$FEC': 'BF_FEC_TYP_REED_SOLOMON',
+            '$PORT_ENABLE': True
             }
-    data_action='a_set_port'
-    bfrt_add_entry(bfrt_info, target, 'table_1', data_action, key, data)
+    data_action=''
+    bfrt_add_entry(bfrt_info, target, '$PORT', data_action, key, data)
     #
 
-    #
-    key = {
-            'hdr.ethernet.srcAddr': mac_str_to_int(v.client_mac)
-          }
-    data = {
-            'dstAddr': mac_str_to_int('ff:ff:ff:ff:ff:ff')
-            }
-    data_action='a_table2'
-    bfrt_add_entry(bfrt_info, target,'table_2', data_action, key, data)
-    #
-
-#
-key = {
-        'hdr.ethernet.dstAddr': mac_str_to_int("ff:ff:ff:ff:ff:ff")
-      }
-data = {
-        'etherType': 0x0800
-        }
-data_action='a_table3'
-bfrt_add_entry(bfrt_info, target,'table_3', data_action, key, data)
-#
-
-#
-key = {
-        'hdr.ethernet.etherType': 0x0800
-      }
-data = {
-         'protocol': 0x11
-        }
-data_action='a_table4'
-bfrt_add_entry(bfrt_info, target,'table_4', data_action, key, data)
-#
-
-for  i, v in sessions.items():
-    if int(i) > LIMIT:
-        break
-    #
-    key = {
-            'hdr.ipv4.protocol': 0x11
-          }
-    data = {
-             'srcAddr': ip2int(v.ip_address)
-            }
-    data_action='a_table5'
-    bfrt_add_entry(bfrt_info, target,'table_5', data_action, key, data)
-    #
-
-    #
-    key = {
-            'hdr.ipv4.srcAddr':ip2int(v.ip_address)
-          }
-    data = {
-             'dstAddr': ip2int("10.71.33.131")
-            }
-    data_action='a_table6'
-    bfrt_add_entry(bfrt_info, target,'table_6', data_action, key, data)
-    #
-
-#
-key = {
-        'hdr.ipv4.dstAddr': ip2int("10.71.33.131")
-      }
-data = {
-         'srcPort':  21512
-        }
-data_action='a_table7'
-bfrt_add_entry(bfrt_info, target,'table_7', data_action, key, data)
-#
-
-#
-key = {
-        'hdr.udp.srcPort': 2152
-      }
-data = {
-         'dstPort': 2152
-        }
-data_action='a_table8'
-bfrt_add_entry(bfrt_info, target,'table_8', data_action, key, data)
-#
-
-for i, v in sessions.items():
-    if int(i) > 4096:
-        break
-    #
-    key = {
-            'hdr.udp.dstPort': 2152
-          }
-    data = {
-             'teid': v.pppoe_sid
-            }
-    data_action='a_table9'
-    bfrt_add_entry(bfrt_info, target,'table_9', data_action, key, data)
-    #
-
-    #
-    key = {
-            'hdr.gtp.teid': v.pppoe_sid
-          }
-    data = {
-             'srcAddr': ip2int(str(ipaddress.ip_address("192.168.0.1") + v.pppoe_sid))
-            }
-    data_action='a_table10'
-    bfrt_add_entry(bfrt_info, target,'table_10', data_action, key, data)
-    #
-
-    #
-    key = {
-             'hdr.ipv4_inner.srcAddr': ip2int(str(ipaddress.ip_address("192.168.0.1") + v.pppoe_sid))
-          }
-    data = {
-            'port': EG_PORT,
-            }
-    data_action='set_egress_port'
-    bfrt_add_entry(bfrt_info, target, 'table_11', data_action, key, data)
-    #
