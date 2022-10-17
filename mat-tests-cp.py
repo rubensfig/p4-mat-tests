@@ -104,80 +104,33 @@ interface = gc.ClientInterface(
     "{}:{}".format(bfrt_ip, bfrt_port), client_id=0, device_id=0
 )
 
-bfrt_info = interface.bfrt_info_get("mat-tests-mat")
+bfrt_info = interface.bfrt_info_get("mat-tests-empty")
 interface.bind_pipeline_config(p4_name=bfrt_info.p4_name)
 
 sessions = Session.read_sessions_from_file("./sessions.json")
 
-LIMIT = 4096
 
-PORTS = [
-288,
-292,
-296,
-300,
-304,
-308,
-312,
-316,
-156,
-152,
-148,
-144,
-140,
-136,
-132,
-128,
-  0,
-  4,
-  8,
- 12,
- 16,
- 20,
- 24,
- 28,
-444,
-440,
-436,
-432,
-428,
-424,
-420,
-416,
-176,
-180,
-184,
-188,
-172,
-284,
-280,
-276,
-272,
-268,
-400,
-404,
-408,
-412,
-396,
- 60,
- 56,
- 52,
- 48,
- 44,
-260,
-]
+#
+key = {
+        '$DEV_PORT': 288,
+      }
+data = {
+        '$SPEED': 'BF_SPEED_100G',
+        '$FEC': 'BF_FEC_TYP_REED_SOLOMON',
+        '$PORT_ENABLE': True
+        }
+data_action=''
+bfrt_add_entry(bfrt_info, target, '$PORT', data_action, key, data)
+#
 
-for i in ports: 
-
-    key = {
-            '$DEV_PORT': i,
-          }
-    data = {
-            '$SPEED': 'BF_SPEED_100G',
-            '$FEC': 'BF_FEC_TYP_REED_SOLOMON',
-            '$PORT_ENABLE': True
-            }
-    data_action=''
-    bfrt_add_entry(bfrt_info, target, '$PORT', data_action, key, data)
-    #
+#
+key = {
+        'ig_intr_md.ingress_port': 288,
+      }
+data = {
+        'port': 292
+        }
+data_action='add_with_a_set_port'
+bfrt_add_entry(bfrt_info, target, 'pipe.table_1', data_action, key, data)
+#
 
