@@ -110,7 +110,7 @@ control SwitchIngress(
         actions = {
             a_set_port;
         }
-        size = 1;
+        size = 16;
     }
 
     apply {
