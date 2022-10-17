@@ -149,7 +149,7 @@ control SwitchEgress(
 // Switch Egress MAU
 // ---------------------------------------------------------------------------
 control SwitchEgressDeparser(packet_out pkt, inout headers_t hdr, in metadata_t meta, in egress_intrinsic_metadata_for_deparser_t eg_dprsr_md) {
-    apply uorce
+    apply {
         pkt.emit(hdr);
     }
 }
