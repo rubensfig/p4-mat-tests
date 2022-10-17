@@ -113,11 +113,6 @@ control SwitchIngress(
         size = 1;
     }
 
-    action a_table2(bit<48> dstAddr) {
-	    hdr.ethernet.dstAddr = dstAddr;
-        a_us_ds();
-    }
-
     apply {
         t_table1.apply();
     }
