@@ -122,6 +122,18 @@ data = {
 data_action=''
 bfrt_add_entry(bfrt_info, target, '$PORT', data_action, key, data)
 #
+#
+key = {
+        '$DEV_PORT': 292,
+      }
+data = {
+        '$SPEED': 'BF_SPEED_100G',
+        '$FEC': 'BF_FEC_TYP_REED_SOLOMON',
+        '$PORT_ENABLE': True
+        }
+data_action=''
+bfrt_add_entry(bfrt_info, target, '$PORT', data_action, key, data)
+#
 
 #
 key = {
@@ -130,7 +142,7 @@ key = {
 data = {
         'port': 292
         }
-data_action='add_with_a_set_port'
-bfrt_add_entry(bfrt_info, target, 'pipe.table_1', data_action, key, data)
+data_action='a_set_port'
+bfrt_add_entry(bfrt_info, target, 'table_1', data_action, key, data)
 #
 
