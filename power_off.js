@@ -1,6 +1,6 @@
 const fritz = require('fritzapi');
 const options = {
-    url: 'https://172.16.101.111',
+    url: 'https://172.16.102.17',
     strictSSL: false  }
 
 fritz.getSessionID("root", "bisdn$2022", options).then(function(sid){
