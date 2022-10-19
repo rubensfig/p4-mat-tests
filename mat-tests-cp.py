@@ -109,35 +109,46 @@ interface.bind_pipeline_config(p4_name=bfrt_info.p4_name)
 
 sessions = Session.read_sessions_from_file("./sessions.json")
 
-
-#
-key = {
-        '$DEV_PORT': 288,
-      }
-data = {
-        '$SPEED': 'BF_SPEED_100G',
-        '$FEC': 'BF_FEC_TYP_REED_SOLOMON',
-        '$PORT_ENABLE': True
-        }
-data_action=''
-bfrt_add_entry(bfrt_info, target, '$PORT', data_action, key, data)
-#
-#
-key = {
-        '$DEV_PORT': 292,
-      }
-data = {
-        '$SPEED': 'BF_SPEED_100G',
-        '$FEC': 'BF_FEC_TYP_REED_SOLOMON',
-        '$PORT_ENABLE': True
-        }
-data_action=''
-bfrt_add_entry(bfrt_info, target, '$PORT', data_action, key, data)
-#
+for i in [288, 292, 296, 300, 304, 308]:
+    #
+    key = {
+            '$DEV_PORT': i,
+          }
+    data = {
+            '$SPEED': 'BF_SPEED_100G',
+            '$FEC': 'BF_FEC_TYP_REED_SOLOMON',
+            '$PORT_ENABLE': True
+            }
+    data_action=''
+    bfrt_add_entry(bfrt_info, target, '$PORT', data_action, key, data)
+    #
 
 #
 key = {
         'ig_intr_md.ingress_port': 288,
+      }
+data = {
+        'port': 296
+        }
+data_action='a_set_port'
+bfrt_add_entry(bfrt_info, target, 'table_1', data_action, key, data)
+#
+
+#
+key = {
+        'ig_intr_md.ingress_port': 300,
+      }
+data = {
+        'port': 304
+        }
+data_action='a_set_port'
+bfrt_add_entry(bfrt_info, target, 'table_1', data_action, key, data)
+#
+
+
+#
+key = {
+        'ig_intr_md.ingress_port': 304,
       }
 data = {
         'port': 292
