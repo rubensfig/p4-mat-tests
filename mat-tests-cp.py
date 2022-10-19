@@ -148,7 +148,7 @@ bfrt_add_entry(bfrt_info, target, 'table_1', data_action, key, data)
 
 #
 key = {
-        'ig_intr_md.ingress_port': 304,
+        'ig_intr_md.ingress_port': 308,
       }
 data = {
         'port': 292
