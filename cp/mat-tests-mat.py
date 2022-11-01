@@ -89,8 +89,6 @@ interface = gc.ClientInterface(
 bfrt_info = interface.bfrt_info_get("mat-tests-mat")
 interface.bind_pipeline_config(p4_name=bfrt_info.p4_name)
 
-sessions = Session.read_sessions_from_file("./sessions.json")
-
 for i in [288, 292, 296, 300, 304, 308]:
     #
     key = {
