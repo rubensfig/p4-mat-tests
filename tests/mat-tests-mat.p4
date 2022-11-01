@@ -6,7 +6,7 @@
 #include "util.p4"
 
 struct metadata_t {
-    bit<3> usds;
+    bit<3> table_number;
 }
 
 struct headers_t {
@@ -90,13 +90,13 @@ control SwitchIngress(
         inout ingress_intrinsic_metadata_for_deparser_t ig_intr_md_for_dprsr,
         inout ingress_intrinsic_metadata_for_tm_t ig_intr_tm_md) {
 
-    action a_us_ds() {
-        meta.usds = 1;
+    action a_change_meta(bit<3> table_number) {
+        meta.table_number = table_number;
     }
 
-    action a_set_port(bit<48> srcAddr) {
-        hdr.ethernet.srcAddr = srcAddr;
-        a_us_ds();
+    action a_set_port(PortId_t port) {
+        ig_intr_tm_md.ucast_egress_port = port;
+        a_change_meta(1);
     }
 
     @name(".table_1")
@@ -110,12 +110,11 @@ control SwitchIngress(
         actions = {
             a_set_port;
         }
-        size = 1;
+        size = 7;
     }
 
-    action a_table2(bit<48> dstAddr) {
-	    hdr.ethernet.dstAddr = dstAddr;
-        a_us_ds();
+    action a_table2() {
+        a_change_meta(2);
     }
 
     @name(".table_2")
@@ -125,18 +124,16 @@ control SwitchIngress(
     table t_table2 {
         key = {
             hdr.ethernet.srcAddr : exact;
+            meta.table_number: exact;
         }
         actions = {
             a_table2;
         }
-#ifdef TBL_SIZE_1
-        size = 1;
-#endif
+        size = 4096;
     }
 
-    action a_table3(bit<16> etherType) {
-        hdr.ethernet.etherType = etherType;
-        a_us_ds();
+    action a_table3() {
+        a_change_meta(3);
     }
 
     @name(".table_3")
@@ -145,19 +142,17 @@ control SwitchIngress(
 #endif
     table t_table3 {
         key = {
-            hdr.ethernet.dstAddr : exact;
+            hdr.ethernet.srcAddr : exact;
+            meta.table_number: exact;
         }
         actions = {
             a_table3;
         }
-#ifdef TBL_SIZE_1
-        size = 1;
-#endif
+        size = 4096;
     }
 
-    action a_table4(bit<8> protocol) {
-        hdr.ipv4.protocol = protocol;
-        a_us_ds();
+    action a_table3() {
+        a_change_meta(3);
     }
 
     @name(".table_4")
@@ -166,19 +161,17 @@ control SwitchIngress(
 #endif
     table t_table4 {
         key = {
-            hdr.ethernet.etherType : exact;
+            hdr.ethernet.srcAddr : exact;
+            meta.table_number: exact;
         }
         actions = {
             a_table4;
         }
-#ifdef TBL_SIZE_1
-        size = 1;
-#endif
+        size = 4096;
     }
 
-    action a_table5(bit<32> srcAddr) {
-        hdr.ipv4.srcAddr = srcAddr;
-        a_us_ds();
+    action a_table5() {
+        a_change_meta(5);
     }
 
     @name(".table_5")
@@ -187,19 +180,17 @@ control SwitchIngress(
 #endif
     table t_table5 {
         key = {
-            hdr.ipv4.protocol : exact;
+            hdr.ethernet.srcAddr : exact;
+            meta.table_number: exact;
         }
         actions = {
             a_table5;
         }
-#ifdef TBL_SIZE_1
-        size = 1;
-#endif
+        size = 4096;
     }
 
-    action a_table6(bit<32> dstAddr) {
-        hdr.ipv4.dstAddr = dstAddr;
-        a_us_ds();
+    action a_table6() {
+        a_change_meta(6);
     }
 
     @name(".table_6")
@@ -208,19 +199,17 @@ control SwitchIngress(
 #endif
     table t_table6 {
         key = {
-            hdr.ipv4.srcAddr : exact;
+            hdr.ethernet.srcAddr : exact;
+            meta.table_number: exact;
         }
         actions = {
             a_table6;
         }
-#ifdef TBL_SIZE_1
-        size = 1;
-#endif
+        size = 4096;
     }
 
-    action a_table7(bit<16> srcPort) {
-        hdr.udp.srcPort = srcPort;
-        a_us_ds();
+    action a_table3() {
+        a_change_meta(3);
     }
 
     @name(".table_7")
@@ -229,19 +218,17 @@ control SwitchIngress(
 #endif
     table t_table7 {
         key = {
-            hdr.ipv4.dstAddr : exact;
+            hdr.ethernet.srcAddr : exact;
+            meta.table_number: exact;
         }
         actions = {
             a_table7;
         }
-#ifdef TBL_SIZE_1
-        size = 1;
-#endif
+        size = 4096;
     }
 
-    action a_table8(bit<16> dstPort) {
-        hdr.udp.dstPort = dstPort;
-        a_us_ds();
+    action a_table8() {
+        a_change_meta(8);
     }
 
     @name(".table_8")
@@ -250,19 +237,17 @@ control SwitchIngress(
 #endif
     table t_table8 {
         key = {
-            hdr.udp.srcPort : exact;
+            hdr.ethernet.srcAddr : exact;
+            meta.table_number: exact;
         }
         actions = {
             a_table8;
         }
-#ifdef TBL_SIZE_1
-        size = 1;
-#endif
+        size = 4096;
     }
 
-    action a_table9(bit<32> teid) {
-        hdr.gtp.teid = teid;
-        a_us_ds();
+    action a_table9() {
+        a_change_meta(9);
     }
 
     @name(".table_9")
@@ -271,19 +256,17 @@ control SwitchIngress(
 #endif
     table t_table9 {
         key = {
-            hdr.udp.dstPort : exact;
+            hdr.ethernet.srcAddr : exact;
+            meta.table_number: exact;
         }
         actions = {
             a_table9;
         }
-#ifdef TBL_SIZE_1
-        size = 1;
-#endif
+        size = 4096;
     }
 
-    action a_table10(bit<32> srcAddr) {
-        hdr.ipv4_inner.srcAddr = srcAddr;
-        a_us_ds();
+    action a_table10() {
+        a_change_meta(10);
     }
 
     @name(".table_10")
@@ -292,101 +275,36 @@ control SwitchIngress(
 #endif
     table t_table10 {
         key = {
-            hdr.gtp.teid : exact;
+            hdr.ethernet.srcAddr : exact;
+            meta.table_number: exact;
         }
         actions = {
             a_table10;
         }
-#ifdef TBL_SIZE_1
-        size = 1;
-#endif
+        size = 4096;
     }
 
-    action set_egress_port(PortId_t port) {
-        ig_intr_tm_md.ucast_egress_port = port;
+    action a_table11() {
+        a_change_meta(11);
     }
+
     @name(".table_11")
 #ifdef TCAM
     @pragma ternary 1
 #endif
     table t_table11 {
         key = {
-            hdr.ipv4_inner.srcAddr : exact;
+            hdr.ethernet.srcAddr : exact;
+            meta.table_number: exact;
         }
         actions = {
-            set_egress_port;
+            a_table11;
         }
-#ifdef TBL_SIZE_1
-        size = 1;
-#endif
+        size = 4096;
     }
-
 
     apply {
         t_table1.apply();
-#ifdef TBL_2
-        t_table2.apply();
-#endif
-#ifdef TBL_3 
-        t_table2.apply();
-        t_table3.apply();
-#endif
-#ifdef TBL_4
-        t_table2.apply();
-        t_table4.apply();
-        t_table3.apply();
-#endif
-#ifdef TBL_5
-        t_table2.apply();
-        t_table4.apply();
-        t_table3.apply();
-        t_table5.apply();
-#endif
-#ifdef TBL_6
-        t_table2.apply();
-        t_table4.apply();
-        t_table3.apply();
-        t_table5.apply();
-        t_table6.apply();
-#endif
-#ifdef TBL_7
-        t_table2.apply();
-        t_table4.apply();
-        t_table3.apply();
-        t_table5.apply();
-        t_table6.apply();
-        t_table7.apply();
-#endif
-#ifdef TBL_8
-        t_table2.apply();
-        t_table4.apply();
-        t_table3.apply();
-        t_table5.apply();
-        t_table6.apply();
-        t_table7.apply();
-        t_table8.apply();
-#endif
-#ifdef TBL_9
-        t_table2.apply();
-        t_table4.apply();
-        t_table3.apply();
-        t_table5.apply();
-        t_table6.apply();
-        t_table7.apply();
-        t_table8.apply();
-        t_table9.apply();
-#endif
-#ifdef TBL_10
-        t_table2.apply();
-        t_table4.apply();
-        t_table3.apply();
-        t_table5.apply();
-        t_table6.apply();
-        t_table7.apply();
-        t_table8.apply();
-        t_table9.apply();
-        t_table10.apply();
-#endif
 #ifdef TBL_11
         t_table2.apply();
         t_table4.apply();
@@ -437,6 +355,14 @@ control SwitchEgressDeparser(packet_out pkt, inout headers_t hdr, in metadata_t 
     }
 }
 
+Pipeline <headers_t, metadata_t, headers_t, metadata_t> (SwitchEmptyParser(),
+    SwitchEmpty(),
+    SwitchEmptyDeparser(),
+    SwitchEgressParser(),
+    SwitchEgress(),
+    SwitchEgressDeparser()
+) empty;
+
 Pipeline(SwitchIngressParser(),
     SwitchIngress(),
     SwitchIngressDeparser(),
@@ -444,4 +370,4 @@ Pipeline(SwitchIngressParser(),
     SwitchEgress(),
     SwitchEgressDeparser()) pipe;
 
-Switch(pipe) main;
+Switch(empty, pipe) main;
