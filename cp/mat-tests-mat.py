@@ -116,17 +116,11 @@ bfrt_add_entry(bfrt_info, target, 'table_1', data_action, key, data)
 
 for tb in range(2, 12):
     for i in gen_mac_addresses():
-        if tb != 2:
-            #
-            key = {
-                    'hdr.ethernet.srcAddr': i,
-                  }
-        else:
-            #
-            key = {
-                    'hdr.ethernet.srcAddr': i,
-                    'meta.table_number': 2
-                  }
+        #
+        key = {
+                'hdr.ethernet.srcAddr': i,
+                'meta.table_number': tb
+              }
         data = { }
         data_action='a_table' + str(tb)
         bfrt_add_entry(bfrt_info, target, 'table_' + str(tb), data_action, key, data)
