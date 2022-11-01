@@ -2,8 +2,8 @@
 
 #include <core.p4>
 #include <tna.p4>
-#include "header.p4"
-#include "util.p4"
+#include "../header.p4"
+#include "../util.p4"
 
 struct metadata_t {
     bit<3> table_number;
