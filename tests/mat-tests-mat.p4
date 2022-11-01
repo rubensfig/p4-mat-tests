@@ -6,7 +6,7 @@
 #include "../util.p4"
 
 struct metadata_t {
-    bit<3> table_number;
+    bit<4> table_number;
 }
 
 struct headers_t {
@@ -90,7 +90,7 @@ control SwitchIngress(
         inout ingress_intrinsic_metadata_for_deparser_t ig_intr_md_for_dprsr,
         inout ingress_intrinsic_metadata_for_tm_t ig_intr_tm_md) {
 
-    action a_change_meta(bit<3> table_number) {
+    action a_change_meta(bit<4> table_number) {
         meta.table_number = table_number;
     }
 
