@@ -208,8 +208,8 @@ control SwitchIngress(
         size = 4096;
     }
 
-    action a_table3() {
-        a_change_meta(3);
+    action a_table7() {
+        a_change_meta(7);
     }
 
     @name(".table_7")
