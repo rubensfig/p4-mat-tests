@@ -86,7 +86,7 @@ interface = gc.ClientInterface(
     "{}:{}".format(bfrt_ip, bfrt_port), client_id=0, device_id=0
 )
 
-bfrt_info = interface.bfrt_info_get("mat-tests-empty")
+bfrt_info = interface.bfrt_info_get("mat-tests-mat")
 interface.bind_pipeline_config(p4_name=bfrt_info.p4_name)
 
 sessions = Session.read_sessions_from_file("./sessions.json")
@@ -118,13 +118,20 @@ bfrt_add_entry(bfrt_info, target, 'table_1', data_action, key, data)
 
 for tb in range(2, 12):
     for i in gen_mac_addresses():
-        #
-        key = {
-                'hdr.ethernet.srcAddr': i,
-              }
+        if tb != 2:
+            #
+            key = {
+                    'hdr.ethernet.srcAddr': i,
+                  }
+        else:
+            #
+            key = {
+                    'hdr.ethernet.srcAddr': i,
+                    'meta.table_number': 2
+                  }
         data = { }
-        data_action='a_table' + str(i)
-        bfrt_add_entry(bfrt_info, target, 'table_' + str(i), data_action, key, data)
+        data_action='a_table' + str(tb)
+        bfrt_add_entry(bfrt_info, target, 'table_' + str(tb), data_action, key, data)
         #
 
 
