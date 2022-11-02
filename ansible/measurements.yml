@@ -12,7 +12,6 @@
      copy:
       dest:  "MAT-SRAM-{{ date }}"
       content: "id,run_stage,power"
-      insertbefore: EOF
 
 - hosts: localhost
   tasks:
