@@ -1,6 +1,6 @@
 ---
 - name: "$SDE_INSTALL/bin/bf-p4c --display-power-budget -g mat-tests-mat.p4 -D TBL_11"
-  command: "$SDE_INSTALL/bin/bf-p4c --display-power-budget -g mat-tests-mat.p4 -D TBL_11"
+  command: "$SDE_INSTALL/bin/bf-p4c --display-power-budget -g mat-tests-mat.p4 -D TBL_11 -D TCAM"
   args:
     chdir: $P4SRC/tests
 
