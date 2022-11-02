@@ -1,40 +1,157 @@
 ---
+- hosts: localhost
+  tasks:
+   - name: run node script
+     command: node ../power_off.js
+
+   - name: let switch init
+     pause:
+       seconds: 30
+
+   - name: run node script
+     command: node ../power_on.js
+
+   - name: let switch init
+     pause:
+       seconds: 300
+
+- hosts: localhost
+  connection: local
+  tasks:
+   - name: run node script
+     command: node ../get_power_read.js
+     register: out
+
+   - lineinfile:
+      path:  mat_sram
+      line: "Reboot: {{ run_id }} | Power: {{ out.stdout_lines[1] }}"
+      insertbefore: EOF
+
 - hosts: data_plane
   become: yes
   tasks:
-    - import_tasks: start_mat_tests.playbook.yml
-      environment:
-        SDE_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
-        SDE: /home/ubuntu/bf-sde-9.9.0
-        BSP_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
-        P4SRC: /home/ubuntu/p4-mat-tests/
+   - import_tasks: start_mat_mat_tests.playbook.yml
+     environment:
+       SDE_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
+       SDE: /home/ubuntu/bf-sde-9.9.0
+       BSP_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
+       P4SRC: /home/ubuntu/p4-mat-tests
+
+   - name: let switch init
+     pause:
+       seconds: 120
+
+- hosts: localhost
+  connection: local
+  tasks:
+   - name: run node script
+     command: node ../get_power_read.js
+     register: out
+
+   - lineinfile:
+      path:  mat_sram
+      line: "Idle: {{ run_id }} | Power: {{ out.stdout_lines[1] }}"
+      insertbefore: EOF
 
 - hosts: traffic_gen
   become: yes
   tasks:
-    - name: restart trex-server
-      service:
-        name: trex-server
-        state: restarted
-      async: 100000
-      poll: 0
+   - name: restart trex-server
+     service:
+       name: trex-server
+       state: restarted
+     async: 100000
+     poll: 0
 
-    - name: let trex start
-      pause:
-        seconds: 20
+   - name: let trex start
+     pause:
+       seconds: 20
 
-    - name: start traffic
-      command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_gtp.py -l ./sessions.json -n {{ n_clients }} --latency True -d 60 -o results/ --mult 90%
-      become: yes
-      args:
-        chdir: /opt/trex/v2.97/
+   - name: Callibration start traffic
+     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py -d 120 -o results/ --mult 100% 
+     async: 10000
+     poll: 0
+     become: yes
+     args:
+       chdir: /opt/trex/v2.97/
 
-    - name: copy logs
-      fetch:
-        src: /opt/trex/v2.97/results/results.json
-        dest: ./tcam-results-{{ run_id }}-{{ n_clients }}
+   - name: let switch init
+     pause:
+       seconds: 120
 
-    - name: delete results
-      file:
-        state: absent
-        path: /opt/trex/v2.97/results/
+   - name: Real start traffic
+     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py -d 240 -o results/ --mult 100% 
+     async: 10000
+     poll: 0
+     become: yes
+     args:
+       chdir: /opt/trex/v2.97/
+
+   - name: let switch init
+     pause:
+       seconds: 120
+
+- hosts: localhost
+  connection: local
+  tasks:
+   - name: run node script
+     command: node ../get_power_read.js
+     register: out
+
+   - lineinfile:
+      path:  mat_sram
+      line: "Traffic_100: {{ run_id }} | Power: {{ out.stdout_lines[1] }}"
+      insertbefore: EOF
+
+- hosts: traffic_gen
+  become: yes
+  tasks:
+   - name: restart trex-server
+     service:
+       name: trex-server
+       state: restarted
+     async: 100000
+     poll: 0
+
+   - name: let trex start
+     pause:
+       seconds: 120
+
+- hosts: localhost
+  connection: local
+  tasks:
+   - name: run node script
+     command: node ../get_power_read.js
+     register: out
+
+   - lineinfile:
+      path:  mat_sram
+      line: "Between: {{ run_id }} | Power: {{ out.stdout_lines[1] }}"
+      insertbefore: EOF
+
+- hosts: traffic_gen
+  become: yes
+  tasks:
+   - name: start traffic
+     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py  -d 240 -o results/ --mult 10%
+     async: 10000
+     poll: 0
+     become: yes
+     args:
+       chdir: /opt/trex/v2.97/
+
+   - name: let switch init
+     pause:
+       seconds: 120
+
+- hosts: localhost
+  connection: local
+  tasks:
+   - name: run node script
+     command: node ../get_power_read.js
+     register: out
+
+   - lineinfile:
+      path:  mat_sram
+      line: "Traffic_30: {{ run_id }} | Power: {{ out.stdout_lines[1] }}"
+      insertbefore: EOF

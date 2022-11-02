@@ -1,0 +1,55 @@
+---
+- name: "$SDE_INSTALL/bin/bf-p4c --display-power-budget -g mat-tests-mat.p4 -D TBL_11"
+  command: "$SDE_INSTALL/bin/bf-p4c --display-power-budget -g mat-tests-mat.p4 -D TBL_11"
+  args:
+    chdir: $P4SRC/tests
+
+- name: "Copy configuration file"
+  copy:
+    src: mat-tests-mat.conf
+    dest: /home/ubuntu/p4-mat-tests/tests/mat-tests-mat.tofino/
+
+- name: Start kernel driver
+  command: "$SDE_INSTALL/bin/bf_kdrv_mod_load $SDE_INSTALL"
+  ignore_errors: True
+
+- name: "copy files to $SDE_INSTALL"
+  command: cp -r mat-tests-mat.tofino $SDE_INSTALL
+  args:
+    chdir: $P4SRC/tests
+
+- name: "start UP"
+  command: $SDE/run_switchd.sh -p switch -c mat-tests-mat.tofino/mat-tests-mat.conf
+  async: 1000000
+  poll: 0
+  register: out
+  args:
+    chdir: $P4SRC/tests
+
+- name: let switch init
+  pause:
+    seconds: 15
+
+- name: "load dp instructions"
+  command: python3 mat-tests-mat.py
+  args:
+    chdir: $P4SRC/cp
+  ignore_errors: True
+ 
+  # - name: "copy experiment logs"
+  #   fetch:
+  #     src: $P4SRC/mat-tests-empty.tofino/pipe/logs/{{ item }}
+  #     dest: ./empty-results-{{ run_id }}
+  #   environment:
+  #     SDE_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
+  #     SDE: /home/ubuntu/bf-sde-9.9.0
+  #     BSP_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
+  #     P4SRC: /home/ubuntu/p4-mat-tests/
+  #   with_items:
+  #     - mau.json
+  #     - mau.power.log
+  #     - power.json
+  #     - resources.json
+  #     - table_summary.log
+  #     - mau.resources.log
+  #     - mau.characterize.log
