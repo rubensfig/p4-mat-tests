@@ -93,6 +93,7 @@
      pause:
        seconds: 120
 
+# TRAFFIC 100% {
    - name: Real start traffic
      command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py -d 240 -o results/ --mult 100% 
      async: 10000
@@ -116,7 +117,9 @@
       path:  "MAT-SRAM-{{ date }}"
       line: "{{ run_id }},traffic_100,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
+# } TRAFFIC 100%
 
+# TRAFFIC 50% {
 - hosts: traffic_gen
   become: yes
   tasks:
@@ -147,6 +150,61 @@
   become: yes
   tasks:
    - name: start traffic
+     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py  -d 240 -o results/ --mult 50%
+     async: 10000
+     poll: 0
+     become: yes
+     args:
+       chdir: /opt/trex/v2.97/
+
+   - name: let switch init
+     pause:
+       seconds: 120
+
+- hosts: localhost
+  connection: local
+  tasks:
+   - name: run node script
+     command: node ../get_power_read.js
+     register: out
+
+   - lineinfile:
+      path:  "MAT-SRAM-{{ date }}"
+      line: "{{ run_id }},traffic_50,{{ out.stdout_lines[1] }}"
+      insertbefore: EOF
+# } TRAFFIC 50%
+
+# TRAFFIC 10% {
+- hosts: traffic_gen
+  become: yes
+  tasks:
+   - name: restart trex-server
+     service:
+       name: trex-server
+       state: restarted
+     async: 100000
+     poll: 0
+
+   - name: let trex start
+     pause:
+       seconds: 120
+
+- hosts: localhost
+  connection: local
+  tasks:
+   - name: run node script
+     command: node ../get_power_read.js
+     register: out
+
+   - lineinfile:
+      path:  "MAT-SRAM-{{ date }}"
+      line: "{{ run_id }},between2,{{ out.stdout_lines[1] }}"
+      insertbefore: EOF
+
+- hosts: traffic_gen
+  become: yes
+  tasks:
+   - name: start traffic
      command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py  -d 240 -o results/ --mult 10%
      async: 10000
      poll: 0
@@ -167,5 +225,6 @@
 
    - lineinfile:
       path:  "MAT-SRAM-{{ date }}"
-      line: "{{ run_id }},traffic_30,{{ out.stdout_lines[1] }}"
+      line: "{{ run_id }},traffic_10,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
+# } TRAFFIC 10%
