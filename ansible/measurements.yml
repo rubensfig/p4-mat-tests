@@ -4,7 +4,7 @@
   tasks:
    - name: Create log file
      copy:
-      dest:  "MAT-TCAM-{{ date }}-{{ run_id }}"
+      dest:  "MAT-TCAM-{{ date }}-{{ run_id }}.csv"
       content: "id,run_stage,power"
 
 - hosts: localhost
@@ -31,7 +31,7 @@
      register: out
 
    - lineinfile:
-      path:  "MAT-TCAM-{{ date }}-{{ run_id }}"
+      path:  "MAT-TCAM-{{ date }}-{{ run_id }}.csv"
       line: "{{ run_id }},reboot,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 
@@ -57,7 +57,7 @@
      register: out
 
    - lineinfile:
-      path:  "MAT-TCAM-{{ date }}-{{ run_id }}"
+      path:  "MAT-TCAM-{{ date }}-{{ run_id }}.csv"
       line: "{{ run_id }},idle,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 
@@ -108,7 +108,7 @@
      register: out
 
    - lineinfile:
-      path:  "MAT-TCAM-{{ date }}-{{ run_id }}"
+      path:  "MAT-TCAM-{{ date }}-{{ run_id }}.csv"
       line: "{{ run_id }},traffic_100,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 # } TRAFFIC 100%
@@ -136,7 +136,7 @@
      register: out
 
    - lineinfile:
-      path:  "MAT-TCAM-{{ date }}-{{ run_id }}"
+      path:  "MAT-TCAM-{{ date }}-{{ run_id }}.csv"
       line: "{{ run_id }},between,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 
@@ -163,7 +163,7 @@
      register: out
 
    - lineinfile:
-      path:  "MAT-TCAM-{{ date }}-{{ run_id }}"
+      path:  "MAT-TCAM-{{ date }}-{{ run_id }}.csv"
       line: "{{ run_id }},traffic_50,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 # } TRAFFIC 50%
@@ -191,7 +191,7 @@
      register: out
 
    - lineinfile:
-      path:  "MAT-TCAM-{{ date }}-{{ run_id }}"
+      path:  "MAT-TCAM-{{ date }}-{{ run_id }}.csv"
       line: "{{ run_id }},between2,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 
@@ -218,7 +218,7 @@
      register: out
 
    - lineinfile:
-      path:  "MAT-TCAM-{{ date }}-{{ run_id }}"
+      path:  "MAT-TCAM-{{ date }}-{{ run_id }}.csv"
       line: "{{ run_id }},traffic_10,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 # } TRAFFIC 10%
