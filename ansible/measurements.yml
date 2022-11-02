@@ -1,4 +1,19 @@
 ---
+- hosts: all
+  connection: local
+  tasks:
+  - name: set fact
+    set_fact: file_name = "MAT-SRAM-{{ date }}"
+
+- hosts: localhost
+  connection: local
+  tasks:
+   - name: Create log file
+     copy:
+      dest:  "MAT-SRAM-{{ date }}"
+      content: "id,run_stage,power"
+      insertbefore: EOF
+
 - hosts: localhost
   tasks:
    - name: run node script
@@ -23,8 +38,8 @@
      register: out
 
    - lineinfile:
-      path:  mat_sram
-      line: "Reboot: {{ run_id }} | Power: {{ out.stdout_lines[1] }}"
+      path:  "MAT-SRAM-{{ date }}"
+      line: "{{ run_id }},reboot,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 
 - hosts: data_plane
@@ -49,8 +64,8 @@
      register: out
 
    - lineinfile:
-      path:  mat_sram
-      line: "Idle: {{ run_id }} | Power: {{ out.stdout_lines[1] }}"
+      path:  "MAT-SRAM-{{ date }}"
+      line: "{{ run_id }},idle,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 
 - hosts: traffic_gen
@@ -99,8 +114,8 @@
      register: out
 
    - lineinfile:
-      path:  mat_sram
-      line: "Traffic_100: {{ run_id }} | Power: {{ out.stdout_lines[1] }}"
+      path:  "MAT-SRAM-{{ date }}"
+      line: "{{ run_id }},traffic_100,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 
 - hosts: traffic_gen
@@ -125,8 +140,8 @@
      register: out
 
    - lineinfile:
-      path:  mat_sram
-      line: "Between: {{ run_id }} | Power: {{ out.stdout_lines[1] }}"
+      path:  "MAT-SRAM-{{ date }}"
+      line: "{{ run_id }},between,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 
 - hosts: traffic_gen
@@ -152,6 +167,6 @@
      register: out
 
    - lineinfile:
-      path:  mat_sram
-      line: "Traffic_30: {{ run_id }} | Power: {{ out.stdout_lines[1] }}"
+      path:  "MAT-SRAM-{{ date }}"
+      line: "{{ run_id }},traffic_30,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
