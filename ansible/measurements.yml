@@ -10,7 +10,7 @@
   tasks:
    - name: Create log file
      copy:
-      dest:  "MAT-SRAM-{{ date }}"
+      dest:  "MAT-SRAM-{{ date }}-{{ run_id }}"
       content: "id,run_stage,power"
 
 - hosts: localhost
