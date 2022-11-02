@@ -1,10 +1,4 @@
 ---
-- hosts: all
-  connection: local
-  tasks:
-  - name: set fact
-    set_fact: file_name = "MAT-SRAM-{{ date }}"
-
 - hosts: localhost
   connection: local
   tasks:
@@ -37,7 +31,7 @@
      register: out
 
    - lineinfile:
-      path:  "MAT-SRAM-{{ date }}"
+      path:  "MAT-SRAM-{{ date }}-{{ run_id }}"
       line: "{{ run_id }},reboot,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 
@@ -63,7 +57,7 @@
      register: out
 
    - lineinfile:
-      path:  "MAT-SRAM-{{ date }}"
+      path:  "MAT-SRAM-{{ date }}-{{ run_id }}"
       line: "{{ run_id }},idle,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 
@@ -114,7 +108,7 @@
      register: out
 
    - lineinfile:
-      path:  "MAT-SRAM-{{ date }}"
+      path:  "MAT-SRAM-{{ date }}-{{ run_id }}"
       line: "{{ run_id }},traffic_100,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 # } TRAFFIC 100%
@@ -142,7 +136,7 @@
      register: out
 
    - lineinfile:
-      path:  "MAT-SRAM-{{ date }}"
+      path:  "MAT-SRAM-{{ date }}-{{ run_id }}"
       line: "{{ run_id }},between,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 
@@ -169,7 +163,7 @@
      register: out
 
    - lineinfile:
-      path:  "MAT-SRAM-{{ date }}"
+      path:  "MAT-SRAM-{{ date }}-{{ run_id }}"
       line: "{{ run_id }},traffic_50,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 # } TRAFFIC 50%
@@ -197,7 +191,7 @@
      register: out
 
    - lineinfile:
-      path:  "MAT-SRAM-{{ date }}"
+      path:  "MAT-SRAM-{{ date }}-{{ run_id }}"
       line: "{{ run_id }},between2,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 
@@ -224,7 +218,7 @@
      register: out
 
    - lineinfile:
-      path:  "MAT-SRAM-{{ date }}"
+      path:  "MAT-SRAM-{{ date }}-{{ run_id }}"
       line: "{{ run_id }},traffic_10,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 # } TRAFFIC 10%
