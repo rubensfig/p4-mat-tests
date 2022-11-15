@@ -8,33 +8,6 @@ import os
 import json
 import ipaddress
 
-class Session:
-    def __init__(
-        self, ip_address, client_mac, server_mac, outer_vlan, inner_vlan, pppoe_sid
-    ):
-        self.ip_address = ip_address
-        self.client_mac = client_mac
-        self.server_mac = server_mac
-        self.outer_vlan = outer_vlan
-        self.inner_vlan = inner_vlan
-        self.pppoe_sid = pppoe_sid
-
-    def __str__(self):
-        return str(self.__dict__)
-
-    @staticmethod
-    def from_dict(dict_obj):
-        return Session(**dict_obj)
-
-    @staticmethod
-    def read_sessions_from_file(file_name):
-        with open(file_name, "r") as sessions_file:
-            json_obj = json.loads(sessions_file.read())
-            return {
-                key: Session.from_dict(value) for key, value in json_obj.items()
-            }
-
-
 bfrt_location = '{}/lib/python*/site-packages/tofino'.format( os.environ['SDE_INSTALL'])
 
 sys.path.append(glob.glob(bfrt_location)[0])
@@ -107,9 +80,7 @@ interface = gc.ClientInterface(
 bfrt_info = interface.bfrt_info_get("mat-tests-empty")
 interface.bind_pipeline_config(p4_name=bfrt_info.p4_name)
 
-sessions = Session.read_sessions_from_file("./sessions.json")
-
-for i in [60, 176]:
+for i in [60, 52]:
     #
     key = {
             '$DEV_PORT': i,
@@ -128,7 +99,7 @@ key = {
         'ig_intr_md.ingress_port': 60,
       }
 data = {
-        'port': 176
+        'port': 52
         }
 data_action='a_set_port'
 bfrt_add_entry(bfrt_info, target, 'table_1', data_action, key, data)
