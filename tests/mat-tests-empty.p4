@@ -186,15 +186,6 @@ control SwitchEmptyDeparser(packet_out pkt, inout headers_t hdr, in metadata_t m
     }
 }
 
-
-Pipeline <headers_t, metadata_t, headers_t, metadata_t> (SwitchEmptyParser(),
-    SwitchEmpty(),
-    SwitchEmptyDeparser(),
-    SwitchEgressParser(),
-    SwitchEgress(),
-    SwitchEgressDeparser()
-) empty;
-
 Pipeline(SwitchIngressParser(),
     SwitchIngress(),
     SwitchIngressDeparser(),
@@ -202,4 +193,4 @@ Pipeline(SwitchIngressParser(),
     SwitchEgress(),
     SwitchEgressDeparser()) pipe;
 
-Switch(empty, pipe) main;
+Switch(pipe) main;
