@@ -109,7 +109,7 @@ interface.bind_pipeline_config(p4_name=bfrt_info.p4_name)
 
 sessions = Session.read_sessions_from_file("./sessions.json")
 
-for i in [288, 292, 296, 300, 304, 308]:
+for i in [60, 176]:
     #
     key = {
             '$DEV_PORT': i,
@@ -125,33 +125,10 @@ for i in [288, 292, 296, 300, 304, 308]:
 
 #
 key = {
-        'ig_intr_md.ingress_port': 288,
+        'ig_intr_md.ingress_port': 60,
       }
 data = {
-        'port': 296
-        }
-data_action='a_set_port'
-bfrt_add_entry(bfrt_info, target, 'table_1', data_action, key, data)
-#
-
-#
-key = {
-        'ig_intr_md.ingress_port': 300,
-      }
-data = {
-        'port': 304
-        }
-data_action='a_set_port'
-bfrt_add_entry(bfrt_info, target, 'table_1', data_action, key, data)
-#
-
-
-#
-key = {
-        'ig_intr_md.ingress_port': 308,
-      }
-data = {
-        'port': 292
+        'port': 176
         }
 data_action='a_set_port'
 bfrt_add_entry(bfrt_info, target, 'table_1', data_action, key, data)
