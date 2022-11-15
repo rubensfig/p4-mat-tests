@@ -76,7 +76,7 @@
        seconds: 20
 
    - name: Callibration start traffic
-     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py -d 120 -o results/ --mult 100% 
+     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py -d 120 -o results/ --mult 100% -l sessions.json
      async: 10000
      poll: 0
      become: yes
@@ -89,7 +89,7 @@
 
 # TRAFFIC 100% {
    - name: Real start traffic
-     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py -d 240 -o results/ --mult 100% 
+     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py -d 240 -o results/ --mult 100% -l sessions.json
      async: 10000
      poll: 0
      become: yes
@@ -129,7 +129,7 @@
        seconds: 20
 
    - name: Real start traffic
-     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py -d 240 -o results/ --mult 80% 
+     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py -d 240 -o results/ --mult 80% -l sessions.json
      async: 10000
      poll: 0
      become: yes
@@ -172,7 +172,7 @@
   become: yes
   tasks:
    - name: start traffic
-     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py  -d 240 -o results/ --mult 60%
+     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py  -d 240 -o results/ --mult 60% -l sessions.json
      async: 10000
      poll: 0
      become: yes
@@ -215,7 +215,7 @@
   become: yes
   tasks:
    - name: start traffic
-     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py  -d 240 -o results/ --mult 40%
+     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py  -d 240 -o results/ --mult 40% -l sessions.json
      async: 10000
      poll: 0
      become: yes
@@ -258,7 +258,7 @@
   become: yes
   tasks:
    - name: start traffic
-     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py  -d 240 -o results/ --mult 20%
+     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py  -d 240 -o results/ --mult 20% -l sessions.json
      async: 10000
      poll: 0
      become: yes
@@ -301,7 +301,7 @@
   become: yes
   tasks:
    - name: start traffic
-     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py  -d 240 -o results/ --mult 5%
+     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py  -d 240 -o results/ --mult 5% -l sessions.json
      async: 10000
      poll: 0
      become: yes
