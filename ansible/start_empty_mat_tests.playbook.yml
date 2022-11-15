@@ -1,4 +1,10 @@
 ---
+- name: github/modules
+  command: "bash ./i2c_utils_std.sh i2c_test_all"
+  ignore_errors: True
+  args:
+    chdir: /home/ubuntu/github/modules
+
 - name: Start kernel driver
   command: "$SDE_INSTALL/bin/bf_kdrv_mod_load $SDE_INSTALL"
   ignore_errors: True
