@@ -27,7 +27,7 @@
     seconds: 15
 
 - name: "load dp instructions"
-  command: python3 mat-tests-cp.py
+  command: python3 mat-tests-empty.py
   args:
     chdir: $P4SRC/cp/
   ignore_errors: True
