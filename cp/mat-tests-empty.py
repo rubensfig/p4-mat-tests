@@ -80,7 +80,9 @@ interface = gc.ClientInterface(
 bfrt_info = interface.bfrt_info_get("mat-tests-empty")
 interface.bind_pipeline_config(p4_name=bfrt_info.p4_name)
 
-for i in [60, 52]:
+ports = [60, 44, 36, 28, 20, 12, 4, 0, 8, 24, 16, 40, 32, 56, 48, 52]
+
+for i in ports:
     #
     key = {
             '$DEV_PORT': i,
@@ -94,14 +96,16 @@ for i in [60, 52]:
     bfrt_add_entry(bfrt_info, target, '$PORT', data_action, key, data)
     #
 
-#
-key = {
-        'ig_intr_md.ingress_port': 60,
-      }
-data = {
-        'port': 52
-        }
-data_action='a_set_port'
-bfrt_add_entry(bfrt_info, target, 'table_1', data_action, key, data)
-#
+for i in range(0, len(ports), 2):
+
+    #
+    key = {
+            'ig_intr_md.ingress_port': ports[i],
+          }
+    data = {
+            'port': ports[i+1]
+            }
+    data_action='a_set_port'
+    bfrt_add_entry(bfrt_info, target, 'table_1', data_action, key, data)
+    #
 

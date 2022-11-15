@@ -4,7 +4,7 @@
   tasks:
    - name: Create log file
      copy:
-      dest:  "S9180-EMPTY-{{ date }}-{{ run_id }}.csv"
+      dest:  "S9180-ALLPORTS-{{ date }}-{{ run_id }}.csv"
       content: "id,run_stage,power"
 
 - hosts: localhost
@@ -31,14 +31,14 @@
      register: out
 
    - lineinfile:
-      path:  "S9180-EMPTY-{{ date }}-{{ run_id }}.csv"
+      path:  "S9180-ALLPORTS-{{ date }}-{{ run_id }}.csv"
       line: "{{ run_id }},reboot,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 
 - hosts: data_plane
   become: yes
   tasks:
-   - import_tasks: start_empty_mat_tests.playbook.yml
+   - import_tasks: start_ALLPORTS_mat_tests.playbook.yml
      environment:
        SDE_INSTALL: /home/ubuntu/bf-sde-9.7.0/install
        SDE: /home/ubuntu/bf-sde-9.7.0
@@ -57,7 +57,7 @@
      register: out
 
    - lineinfile:
-      path:  "S9180-EMPTY-{{ date }}-{{ run_id }}.csv"
+      path:  "S9180-ALLPORTS-{{ date }}-{{ run_id }}.csv"
       line: "{{ run_id }},idle,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 
@@ -108,7 +108,7 @@
      register: out
 
    - lineinfile:
-      path:  "S9180-EMPTY-{{ date }}-{{ run_id }}.csv"
+      path:  "S9180-ALLPORTS-{{ date }}-{{ run_id }}.csv"
       line: "{{ run_id }},traffic_100,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 # } TRAFFIC 100%
@@ -148,7 +148,7 @@
      register: out
 
    - lineinfile:
-      path:  "S9180-EMPTY-{{ date }}-{{ run_id }}.csv"
+      path:  "S9180-ALLPORTS-{{ date }}-{{ run_id }}.csv"
       line: "{{ run_id }},traffic_80,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 # } TRAFFIC 80%
@@ -191,7 +191,7 @@
      register: out
 
    - lineinfile:
-      path:  "S9180-EMPTY-{{ date }}-{{ run_id }}.csv"
+      path:  "S9180-ALLPORTS-{{ date }}-{{ run_id }}.csv"
       line: "{{ run_id }},traffic_60,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 # } TRAFFIC 60%
@@ -234,7 +234,7 @@
      register: out
 
    - lineinfile:
-      path:  "S9180-EMPTY-{{ date }}-{{ run_id }}.csv"
+      path:  "S9180-ALLPORTS-{{ date }}-{{ run_id }}.csv"
       line: "{{ run_id }},traffic_40,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 # } TRAFFIC 40%
@@ -277,7 +277,7 @@
      register: out
 
    - lineinfile:
-      path:  "S9180-EMPTY-{{ date }}-{{ run_id }}.csv"
+      path:  "S9180-ALLPORTS-{{ date }}-{{ run_id }}.csv"
       line: "{{ run_id }},traffic_20,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 # } TRAFFIC 20%
@@ -320,7 +320,7 @@
      register: out
 
    - lineinfile:
-      path:  "S9180-EMPTY-{{ date }}-{{ run_id }}.csv"
-      line: "{{ run_id }},traffic_20,{{ out.stdout_lines[1] }}"
+      path:  "S9180-ALLPORTS-{{ date }}-{{ run_id }}.csv"
+      line: "{{ run_id }},traffic_5,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 # } TRAFFIC 5%
