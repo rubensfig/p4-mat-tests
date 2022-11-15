@@ -1,35 +1,10 @@
 ---
-#- name: Compile -D TBL_{{ size }} --display-power-budget -g mat-tests-mat.p4
-#  command: "$SDE_INSTALL/bin/bf-p4c --display-power-budget -g mat-tests-empty.p4"
-#  environment:
-#    SDE_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
-#    SDE: /home/ubuntu/bf-sde-9.9.0
-#    BSP_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
-#    P4SRC: /home/ubuntu/p4-mat-tests/
-#  args:
-#    chdir: $P4SRC
-
-# - name: "Copy configuration file"
-#   copy:
-#     src: mat-tests-empty.conf
-#     dest: /home/ubuntu/p4-mat-tests/mat-tests-empty.tofino/
-
 - name: Start kernel driver
   command: "$SDE_INSTALL/bin/bf_kdrv_mod_load $SDE_INSTALL"
-  environment:
-    SDE_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
-    SDE: /home/ubuntu/bf-sde-9.9.0
-    BSP_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
-    P4SRC: /home/ubuntu/p4-mat-tests/
   ignore_errors: True
 
 - name: "copy files to $SDE_INSTALL"
-  command: cp -r $P4SRC/mat-tests-empty.tofino $SDE_INSTALL
-  environment:
-    SDE_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
-    SDE: /home/ubuntu/bf-sde-9.9.0
-    BSP_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
-    P4SRC: /home/ubuntu/p4-mat-tests/
+  command: cp -r tests/mat-tests-empty.tofino $SDE_INSTALL
   args:
     chdir: $P4SRC
 
@@ -38,11 +13,6 @@
   async: 1000000
   poll: 0
   register: out
-  environment:
-    SDE_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
-    SDE: /home/ubuntu/bf-sde-9.9.0
-    BSP_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
-    P4SRC: /home/ubuntu/p4-mat-tests/
   args:
     chdir: $P4SRC
 
@@ -52,11 +22,6 @@
 
 - name: "load dp instructions"
   command: python3 mat-tests-cp.py
-  environment:
-    SDE_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
-    SDE: /home/ubuntu/bf-sde-9.9.0
-    BSP_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
-    P4SRC: /home/ubuntu/p4-mat-tests/
   args:
     chdir: $P4SRC
   ignore_errors: True

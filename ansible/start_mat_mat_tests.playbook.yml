@@ -35,21 +35,3 @@
   args:
     chdir: $P4SRC/cp
   ignore_errors: True
- 
-  # - name: "copy experiment logs"
-  #   fetch:
-  #     src: $P4SRC/mat-tests-empty.tofino/pipe/logs/{{ item }}
-  #     dest: ./empty-results-{{ run_id }}
-  #   environment:
-  #     SDE_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
-  #     SDE: /home/ubuntu/bf-sde-9.9.0
-  #     BSP_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
-  #     P4SRC: /home/ubuntu/p4-mat-tests/
-  #   with_items:
-  #     - mau.json
-  #     - mau.power.log
-  #     - power.json
-  #     - resources.json
-  #     - table_summary.log
-  #     - mau.resources.log
-  #     - mau.characterize.log

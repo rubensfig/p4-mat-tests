@@ -1,0 +1,13 @@
+---
+data_plane:
+  hosts:
+    s9180.labshared.bisdn.de:
+  vars:
+    ansible_user: ubuntu
+    ansible_password: ubuntu
+traffic_gen:
+  hosts:
+    waldorf.labshared.bisdn.de:
+  vars:
+    ansible_user: centos
+

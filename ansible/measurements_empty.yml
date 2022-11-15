@@ -4,7 +4,7 @@
   tasks:
    - name: Create log file
      copy:
-      dest:  "MAT-TCAM-{{ date }}-{{ run_id }}.csv"
+      dest:  "S9180-EMPTY-{{ date }}-{{ run_id }}.csv"
       content: "id,run_stage,power"
 
 - hosts: localhost
@@ -31,18 +31,18 @@
      register: out
 
    - lineinfile:
-      path:  "MAT-TCAM-{{ date }}-{{ run_id }}.csv"
+      path:  "S9180-EMPTY-{{ date }}-{{ run_id }}.csv"
       line: "{{ run_id }},reboot,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 
 - hosts: data_plane
   become: yes
   tasks:
-   - import_tasks: start_mat_mat_tests.playbook.yml
+   - import_tasks: start_empty_mat_tests.playbook.yml
      environment:
-       SDE_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
-       SDE: /home/ubuntu/bf-sde-9.9.0
-       BSP_INSTALL: /home/ubuntu/bf-sde-9.9.0/install
+       SDE_INSTALL: /home/ubuntu/bf-sde-9.7.0/install
+       SDE: /home/ubuntu/bf-sde-9.7.0
+       BSP_INSTALL: /home/ubuntu/bf-sde-9.7.0/install
        P4SRC: /home/ubuntu/p4-mat-tests
 
    - name: let switch init
@@ -57,7 +57,7 @@
      register: out
 
    - lineinfile:
-      path:  "MAT-TCAM-{{ date }}-{{ run_id }}.csv"
+      path:  "S9180-EMPTY-{{ date }}-{{ run_id }}.csv"
       line: "{{ run_id }},idle,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 
@@ -108,12 +108,12 @@
      register: out
 
    - lineinfile:
-      path:  "MAT-TCAM-{{ date }}-{{ run_id }}.csv"
+      path:  "S9180-EMPTY-{{ date }}-{{ run_id }}.csv"
       line: "{{ run_id }},traffic_100,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
 # } TRAFFIC 100%
-
-# TRAFFIC 50% {
+#
+# TRAFFIC 80% {
 - hosts: traffic_gen
   become: yes
   tasks:
@@ -126,25 +126,10 @@
 
    - name: let trex start
      pause:
-       seconds: 120
+       seconds: 20
 
-- hosts: localhost
-  connection: local
-  tasks:
-   - name: run node script
-     command: node ../get_power_read.js
-     register: out
-
-   - lineinfile:
-      path:  "MAT-TCAM-{{ date }}-{{ run_id }}.csv"
-      line: "{{ run_id }},between,{{ out.stdout_lines[1] }}"
-      insertbefore: EOF
-
-- hosts: traffic_gen
-  become: yes
-  tasks:
-   - name: start traffic
-     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py  -d 240 -o results/ --mult 50%
+   - name: Real start traffic
+     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py -d 240 -o results/ --mult 80% 
      async: 10000
      poll: 0
      become: yes
@@ -163,12 +148,12 @@
      register: out
 
    - lineinfile:
-      path:  "MAT-TCAM-{{ date }}-{{ run_id }}.csv"
-      line: "{{ run_id }},traffic_50,{{ out.stdout_lines[1] }}"
+      path:  "S9180-EMPTY-{{ date }}-{{ run_id }}.csv"
+      line: "{{ run_id }},traffic_80,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
-# } TRAFFIC 50%
+# } TRAFFIC 80%
 
-# TRAFFIC 10% {
+# TRAFFIC 60% {
 - hosts: traffic_gen
   become: yes
   tasks:
@@ -183,23 +168,11 @@
      pause:
        seconds: 120
 
-- hosts: localhost
-  connection: local
-  tasks:
-   - name: run node script
-     command: node ../get_power_read.js
-     register: out
-
-   - lineinfile:
-      path:  "MAT-TCAM-{{ date }}-{{ run_id }}.csv"
-      line: "{{ run_id }},between2,{{ out.stdout_lines[1] }}"
-      insertbefore: EOF
-
 - hosts: traffic_gen
   become: yes
   tasks:
    - name: start traffic
-     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py  -d 240 -o results/ --mult 10%
+     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py  -d 240 -o results/ --mult 60%
      async: 10000
      poll: 0
      become: yes
@@ -218,7 +191,136 @@
      register: out
 
    - lineinfile:
-      path:  "MAT-TCAM-{{ date }}-{{ run_id }}.csv"
-      line: "{{ run_id }},traffic_10,{{ out.stdout_lines[1] }}"
+      path:  "S9180-EMPTY-{{ date }}-{{ run_id }}.csv"
+      line: "{{ run_id }},traffic_60,{{ out.stdout_lines[1] }}"
       insertbefore: EOF
-# } TRAFFIC 10%
+# } TRAFFIC 60%
+
+# TRAFFIC 40% {
+- hosts: traffic_gen
+  become: yes
+  tasks:
+   - name: restart trex-server
+     service:
+       name: trex-server
+       state: restarted
+     async: 100000
+     poll: 0
+
+   - name: let trex start
+     pause:
+       seconds: 120
+
+- hosts: traffic_gen
+  become: yes
+  tasks:
+   - name: start traffic
+     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py  -d 240 -o results/ --mult 40%
+     async: 10000
+     poll: 0
+     become: yes
+     args:
+       chdir: /opt/trex/v2.97/
+
+   - name: let switch init
+     pause:
+       seconds: 120
+
+- hosts: localhost
+  connection: local
+  tasks:
+   - name: run node script
+     command: node ../get_power_read.js
+     register: out
+
+   - lineinfile:
+      path:  "S9180-EMPTY-{{ date }}-{{ run_id }}.csv"
+      line: "{{ run_id }},traffic_40,{{ out.stdout_lines[1] }}"
+      insertbefore: EOF
+# } TRAFFIC 40%
+#
+# TRAFFIC 20% {
+- hosts: traffic_gen
+  become: yes
+  tasks:
+   - name: restart trex-server
+     service:
+       name: trex-server
+       state: restarted
+     async: 100000
+     poll: 0
+
+   - name: let trex start
+     pause:
+       seconds: 120
+
+- hosts: traffic_gen
+  become: yes
+  tasks:
+   - name: start traffic
+     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py  -d 240 -o results/ --mult 20%
+     async: 10000
+     poll: 0
+     become: yes
+     args:
+       chdir: /opt/trex/v2.97/
+
+   - name: let switch init
+     pause:
+       seconds: 120
+
+- hosts: localhost
+  connection: local
+  tasks:
+   - name: run node script
+     command: node ../get_power_read.js
+     register: out
+
+   - lineinfile:
+      path:  "S9180-EMPTY-{{ date }}-{{ run_id }}.csv"
+      line: "{{ run_id }},traffic_20,{{ out.stdout_lines[1] }}"
+      insertbefore: EOF
+# } TRAFFIC 20%
+#
+# TRAFFIC 5% {
+- hosts: traffic_gen
+  become: yes
+  tasks:
+   - name: restart trex-server
+     service:
+       name: trex-server
+       state: restarted
+     async: 100000
+     poll: 0
+
+   - name: let trex start
+     pause:
+       seconds: 120
+
+- hosts: traffic_gen
+  become: yes
+  tasks:
+   - name: start traffic
+     command: python3 automation/trex_control_plane/interactive/trex/examples/stl/stl_normal_traffic.py  -d 240 -o results/ --mult 5%
+     async: 10000
+     poll: 0
+     become: yes
+     args:
+       chdir: /opt/trex/v2.97/
+
+   - name: let switch init
+     pause:
+       seconds: 120
+
+- hosts: localhost
+  connection: local
+  tasks:
+   - name: run node script
+     command: node ../get_power_read.js
+     register: out
+
+   - lineinfile:
+      path:  "S9180-EMPTY-{{ date }}-{{ run_id }}.csv"
+      line: "{{ run_id }},traffic_20,{{ out.stdout_lines[1] }}"
+      insertbefore: EOF
+# } TRAFFIC 5%
