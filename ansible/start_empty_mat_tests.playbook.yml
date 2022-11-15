@@ -29,7 +29,7 @@
 - name: "load dp instructions"
   command: python3 mat-tests-cp.py
   args:
-    chdir: $P4SRC
+    chdir: $P4SRC/cp/
   ignore_errors: True
  
   # - name: "copy experiment logs"
