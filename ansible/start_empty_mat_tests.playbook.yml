@@ -20,7 +20,7 @@
   poll: 0
   register: out
   args:
-    chdir: $P4SRC
+    chdir: $P4SRC/tests
 
 - name: let switch init
   pause:
